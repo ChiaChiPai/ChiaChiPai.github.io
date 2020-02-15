@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="JS地下城 1F 九九乘法表 練習目標:JavaScript:  JS的命名與CSS分開  Sass:  使用@import分割檔案 使用自己的格線系統 類別階層不超過四層為原則 不使用 ID，一律使用 Smacss — 模組化核心語法 一率採用小駝峰式命名  一陣子沒練習感覺就會忘記，一開始的排版居然就讓我想了一陣子…四個角的x一開始我用flex，但距離總是抓不對，翻了之前的HTML&#x2F;CSS的筆">
+<meta name="description" content="JS地下城 1F 九九乘法表 練習目標:JavaScript:  JS的命名與CSS分開  Sass:  使用@import分割檔案 使用自己的格線系統 類別階層不超過四層為原則 不使用 ID，一律使用 Smacss — 模組化核心語法 一率採用小駝峰式命名">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[js 地下層 - 第一層]">
 <meta property="og:url" content="http://pai.github.io/2020/02/15/%E7%AC%AC%E4%B8%80%E5%B1%A4/index.html">
 <meta property="og:site_name" content="Pai 的FtoN前端養成手札">
-<meta property="og:description" content="JS地下城 1F 九九乘法表 練習目標:JavaScript:  JS的命名與CSS分開  Sass:  使用@import分割檔案 使用自己的格線系統 類別階層不超過四層為原則 不使用 ID，一律使用 Smacss — 模組化核心語法 一率採用小駝峰式命名  一陣子沒練習感覺就會忘記，一開始的排版居然就讓我想了一陣子…四個角的x一開始我用flex，但距離總是抓不對，翻了之前的HTML&#x2F;CSS的筆">
+<meta property="og:description" content="JS地下城 1F 九九乘法表 練習目標:JavaScript:  JS的命名與CSS分開  Sass:  使用@import分割檔案 使用自己的格線系統 類別階層不超過四層為原則 不使用 ID，一律使用 Smacss — 模組化核心語法 一率採用小駝峰式命名">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://miro.medium.com/max/527/1*UKh02viS_-Roi-yL-ARpzw.png">
 <meta property="og:image" content="https://miro.medium.com/max/2648/1*Qc94zEdYUSUYESpQXdRXrQ.png">
 <meta property="og:image" content="https://miro.medium.com/max/530/1*Us-K4TN7OqjkaOeSR2T5zA.png">
 <meta property="og:image" content="https://miro.medium.com/max/2870/1*OuIng8CzPtaDsZn3nBo22w.png">
 <meta property="article:published_time" content="2020-02-15T07:26:48.000Z">
-<meta property="article:modified_time" content="2020-02-15T07:31:04.202Z">
+<meta property="article:modified_time" content="2020-02-15T07:32:58.152Z">
 <meta property="article:author" content="Pai">
 <meta property="article:tag" content="js地下層">
 <meta property="article:tag" content="JavaScript">
@@ -193,6 +193,16 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
           </a>
         </li>
       
@@ -374,10 +384,9 @@
 <li>類別階層不超過四層為原則</li>
 <li>不使用 ID，一律使用</li>
 <li>Smacss — 模組化核心語法</li>
-<li>一率採用小駝峰式命名</li>
+<li>一率採用小駝峰式命名<a id="more"></a>
+一陣子沒練習感覺就會忘記，一開始的排版居然就讓我想了一陣子…<br>四個角的x一開始我用flex，但距離總是抓不對，<br>翻了之前的HTML/CSS的筆記才想起還有before/after的屬性了。<br>要記得之後看到前後有插入東西的排版要想起before/after，<br>開始進入正題…<h2 id="Smacss-—-模組化核心語法"><a href="#Smacss-—-模組化核心語法" class="headerlink" title="Smacss — 模組化核心語法"></a>Smacss — 模組化核心語法</h2>使用BS4習慣後，對於每次都要為特定的HTML標籤命名寫屬性感到麻煩，<br>這時使用each+ Sass Maps就很方便。</li>
 </ol>
-<p>一陣子沒練習感覺就會忘記，一開始的排版居然就讓我想了一陣子…<br>四個角的x一開始我用flex，但距離總是抓不對，<br>翻了之前的HTML/CSS的筆記才想起還有before/after的屬性了。<br>要記得之後看到前後有插入東西的排版要想起before/after，<br>開始進入正題…</p>
-<h2 id="Smacss-—-模組化核心語法"><a href="#Smacss-—-模組化核心語法" class="headerlink" title="Smacss — 模組化核心語法"></a>Smacss — 模組化核心語法</h2><p>使用BS4習慣後，對於每次都要為特定的HTML標籤命名寫屬性感到麻煩，<br>這時使用each+ Sass Maps就很方便。</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$map&#123;</span><br><span class="line">  key1: value1,//value後面是,結尾</span><br><span class="line">  <span class="selector-tag">key2</span>: <span class="selector-tag">value2</span>,</span><br><span class="line">  <span class="selector-tag">key3</span>: <span class="selector-tag">value3</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="1-注意key的名稱不能重複。"><a href="#1-注意key的名稱不能重複。" class="headerlink" title="1. 注意key的名稱不能重複。"></a>1. 注意key的名稱不能重複。</h3><h3 id="2-key-value可以是各種Sass資料型態"><a href="#2-key-value可以是各種Sass資料型態" class="headerlink" title="2. key/value可以是各種Sass資料型態"></a>2. key/value可以是各種Sass資料型態</h3><ul>
 <li>字串: 可以有上引號也可以沒有。“微軟正黑體”、nowrap。</li>
@@ -549,10 +558,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                
+                <a href="/categories/index.html">
                   <span class="site-state-item-count">1</span>
                   <span class="site-state-item-name">categories</span>
-                
+                </a>
               </div>
             
 

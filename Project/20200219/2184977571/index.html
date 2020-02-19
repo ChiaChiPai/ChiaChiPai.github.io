@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-TW">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="刷題,Vue 課程作業," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="壹、作業目標- 將資料內容透過 &quot;元件&quot; 呈現 - 製作城市過濾選項 - 將外層的資料透過 Props 傳到內層 - 將內層資料透過 emit 傳遞到外層 (作為另一個關注城市的呈現) - 依據不同污染呈現不同色彩 - 透過 localStorage 儲存上次關注的城市  貳、前言這個作業算是第一個我以 Vue 完成的小專案，剛從原生 JS 轉換過來框架，有許多概念都滿模糊的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Vue 空氣品質 api 練習]">
+<meta property="og:url" content="http://pai.github.io/Project/20200219/2184977571/index.html">
+<meta property="og:site_name" content="Pai 的 F2E 前端養成手札">
+<meta property="og:description" content="壹、作業目標- 將資料內容透過 &quot;元件&quot; 呈現 - 製作城市過濾選項 - 將外層的資料透過 Props 傳到內層 - 將內層資料透過 emit 傳遞到外層 (作為另一個關注城市的呈現) - 依據不同污染呈現不同色彩 - 透過 localStorage 儲存上次關注的城市  貳、前言這個作業算是第一個我以 Vue 完成的小專案，剛從原生 JS 轉換過來框架，有許多概念都滿模糊的。">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-02-19T14:17:56.000Z">
+<meta property="article:modified_time" content="2020-02-19T16:45:20.332Z">
+<meta property="article:author" content="Pai">
+<meta property="article:tag" content="刷題">
+<meta property="article:tag" content="Vue 課程作業">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pai.github.io/Project/20200219/2184977571/"/>
+
+
+
+
+
+  <title>[Vue 空氣品質 api 練習] | Pai 的 F2E 前端養成手札</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', '[object Object]', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+  <meta name="google-site-verification" content="dMCcogjLcZzAwEC7kHMUbRZyNPyutGupoNtCuW94v_I" />
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Pai 的 F2E 前端養成手札</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-首頁">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分類">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-檔案">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            檔案
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-posts" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pai.github.io/Project/20200219/2184977571/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Pai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Pai 的 F2E 前端養成手札">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">[Vue 空氣品質 api 練習]</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-19T22:17:56+08:00">
+                2020-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Project/" itemprop="url" rel="index">
+                    <span itemprop="name">刷題篇</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="壹、作業目標"><a href="#壹、作業目標" class="headerlink" title="壹、作業目標"></a>壹、作業目標</h1><pre><code>- 將資料內容透過 &quot;元件&quot; 呈現
+- 製作城市過濾選項
+- 將外層的資料透過 Props 傳到內層
+- 將內層資料透過 emit 傳遞到外層 (作為另一個關注城市的呈現)
+- 依據不同污染呈現不同色彩
+- 透過 localStorage 儲存上次關注的城市 </code></pre><hr>
+<h1 id="貳、前言"><a href="#貳、前言" class="headerlink" title="貳、前言"></a>貳、前言</h1><p>這個作業算是第一個我以 Vue 完成的小專案，剛從原生 JS 轉換過來框架，有許多概念都滿模糊的。<br>所以一開始滿痛苦的，這個小專案也花了我兩天的時間。</p>
+<hr>
+<h1 id="參、程式發想流程"><a href="#參、程式發想流程" class="headerlink" title="參、程式發想流程"></a>參、程式發想流程</h1><hr>
+<p>開發心得: 起頭還是要從最簡單的開始，難的事留到後面想，有時候前面的路鋪好了，後面難走的路也會變順。</p>
+<pre><code>## 一、 使用撈出空汙 JSON 的資料呈現在畫面上。
+## 二、 將各縣市的資料撈出來過濾，去除重複的縣市。
+## 三、 選擇下拉式選單縣市，下方呈現出對應的縣市空污資料。
+## 四、 點選星號，可以將下方的資料新增到關注名單。而下方被點選的資料會消失。
+## 五、 點選上方關注資料的星號，那筆關注資料會被取消，回到下方的分類資料。
+## 六、 特定的空氣品質，給予對應的背景顏色。
+## 七、 將關注的資料儲存到 localStorage 裡，並且網頁下次打開，關注欄也會呈現最新的空污資訊。</code></pre><hr>
+<h1 id="肆、程式撰寫細節"><a href="#肆、程式撰寫細節" class="headerlink" title="肆、程式撰寫細節"></a>肆、程式撰寫細節</h1><h2 id="一、-撈出空汙-JSON-的資料呈現在畫面上。"><a href="#一、-撈出空汙-JSON-的資料呈現在畫面上。" class="headerlink" title="一、 撈出空汙 JSON 的資料呈現在畫面上。"></a>一、 撈出空汙 JSON 的資料呈現在畫面上。</h2><pre><code>### 1. </code></pre><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"card-columns"</span>&gt;</span></span><br><span class="line">    // 使用 v-for 建議都綁定 :key，以防之後可能會使用到不被快速置換的標籤</span><br><span class="line">    // :pm-data="item" 綁定後，就會把 item 在 filterData 讀到的資料傳到 pm-data</span><br><span class="line">    <span class="tag">&lt;<span class="name">county-list</span> <span class="attr">v-for</span>=<span class="string">"(item,key) in filterData"</span> <span class="attr">:pm-data</span>=<span class="string">"item"</span> <span class="attr">:key</span>=<span class="string">"key"</span> @<span class="attr">star-click</span>=<span class="string">"toggleFocus"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">county-list</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">//建立 x-template 模板</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/x-template"</span> <span class="attr">id</span>=<span class="string">"listTemplate"</span>&gt;</span></span><br><span class="line"><span class="javascript">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"card"</span> :<span class="class"><span class="keyword">class</span></span>=<span class="string">"statusColor"</span>&gt;</span></span><br><span class="line"><span class="handlebars"><span class="xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"card-header"</span>&gt;</span></span><span class="template-variable">&#123;&#123; pmData.County &#125;&#125;</span><span class="xml"> - </span><span class="template-variable">&#123;&#123; pmData.SiteName &#125;&#125;</span></span></span><br><span class="line"><span class="javascript">      &lt;a href=<span class="string">"#"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"float-right"</span> @click.prevent=<span class="string">"staredCounty"</span>&gt;</span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;<span class="name">slot</span>&gt;</span></span></span></span><br><span class="line"><span class="javascript">          &lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"far fa-star"</span>&gt;&lt;<span class="regexp">/i&gt;</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">      <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="javascript">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"card-body"</span>&gt;</span></span><br><span class="line"><span class="javascript">      &lt;ul <span class="class"><span class="keyword">class</span></span>=<span class="string">"list-unstyled"</span>&gt;</span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>AQI 指數: </span><span class="template-variable">&#123;&#123; pmData.AQI &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>PM 2.5: </span><span class="template-variable">&#123;&#123; pmData['PM2.5_AVG'] &#125;&#125;</span><span class="xml"> <span class="comment">&lt;!-- pmData['PM2.5_AVG'] 因為有特殊標點符號，要改成括號'[]' --&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>說明: </span><span class="template-variable">&#123;&#123; pmData.Status &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">      <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">    </span><span class="template-variable">&#123;&#123; pmData.PublishTime &#125;&#125;</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span>  </span><br><span class="line"></span><br><span class="line"><span class="actionscript"><span class="comment">//使用 props 將外層資料傳到內層(x-template 裡面)</span></span></span><br><span class="line"><span class="actionscript">Vue.component(<span class="string">'county-list'</span>, &#123;</span></span><br><span class="line"><span class="actionscript">  props:[<span class="string">'pmData'</span>],</span></span><br><span class="line"><span class="actionscript">  template: <span class="string">'#listTemplate'</span>,</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="actionscript"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="actionscript">    el: <span class="string">'#app'</span>,</span></span><br><span class="line">    data: &#123;</span><br><span class="line">        filterData: [],</span><br><span class="line">    &#125;,</span><br><span class="line"><span class="actionscript">    created: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">const</span> vm = <span class="keyword">this</span>;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">const</span> api = <span class="string">'http://opendata2.epa.gov.tw/AQI.json'</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">        <span class="comment">// 把 ajax 資料放到 filterData 裡面</span></span></span><br><span class="line"><span class="actionscript">        $.get(api).then(<span class="function"><span class="keyword">function</span><span class="params">( response )</span> </span>&#123;</span></span><br><span class="line">        vm.filterData = response;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="二、-將各縣市的資料撈出來過濾，去除重複的縣市。"><a href="#二、-將各縣市的資料撈出來過濾，去除重複的縣市。" class="headerlink" title="二、 將各縣市的資料撈出來過濾，去除重複的縣市。"></a>二、 將各縣市的資料撈出來過濾，去除重複的縣市。</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//擷取下拉式選單縣市資料</span></span><br><span class="line"><span class="keyword">let</span> locationArray = [];<span class="comment">// 創建出一個陣列，用來存放擷取出來的縣市</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span> ; i&lt;vm.data.length ; i++)&#123;</span><br><span class="line">    locationArray.push(vm.data[i].County);<span class="comment">// 把全部縣市放到locationArray裡面</span></span><br><span class="line">&#125;</span><br><span class="line">vm.location = locationArray.filter(<span class="function"><span class="keyword">function</span>(<span class="params">element,index,array</span>)</span>&#123; <span class="comment">//使用 filter 把重複的縣市過濾掉</span></span><br><span class="line">    <span class="keyword">return</span> array.indexOf(element) === index;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><a href="">過濾重複物件內重複值的方式(待補)</a></li>
+</ul>
+<h2 id="三、-選擇下拉式選單縣市，下方呈現出對應的縣市空污資料。"><a href="#三、-選擇下拉式選單縣市，下方呈現出對應的縣市空污資料。" class="headerlink" title="三、 選擇下拉式選單縣市，下方呈現出對應的縣市空污資料。"></a>三、 選擇下拉式選單縣市，下方呈現出對應的縣市空污資料。</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">id</span>=<span class="string">""</span> <span class="attr">class</span>=<span class="string">"form-control mb-3"</span> @<span class="attr">change</span>=<span class="string">"filterCounty"</span>&gt;</span> <span class="tag">&lt;<span class="name">--當下拉式選單被選取時，觸發@change="filterCounty"--</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span>--- 請選擇城市 ---<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">:value</span>=<span class="string">"item"</span> <span class="attr">v-for</span>=<span class="string">"(item,key) in location"</span> <span class="attr">:key</span>=<span class="string">"key"</span>&gt;</span>&#123;&#123; item &#125;&#125;<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">methods: &#123;</span><br><span class="line"><span class="actionscript">    filterCounty: <span class="function"><span class="keyword">function</span><span class="params">(e)</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">      <span class="keyword">const</span> vm = <span class="keyword">this</span>;</span></span><br><span class="line">      vm.filterData = [];</span><br><span class="line"><span class="javascript">      <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span> ; i&lt;vm.data.length ; i++)&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">if</span>(e.target.value == vm.data[i].County)&#123; <span class="comment">//當下拉式選單選取的縣市等於資料中的縣市時</span></span></span><br><span class="line">          vm.filter = e.target.value;</span><br><span class="line"><span class="actionscript">          vm.filterData.push(vm.data[i]); <span class="comment">//將資料中的縣市，加入到 filterData 裡面</span></span></span><br><span class="line">        &#125;;</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="四、-點選星號，可以將下方的資料新增到關注名單。而下方被點選的資料會消失。"><a href="#四、-點選星號，可以將下方的資料新增到關注名單。而下方被點選的資料會消失。" class="headerlink" title="四、 點選星號，可以將下方的資料新增到關注名單。而下方被點選的資料會消失。"></a>四、 點選星號，可以將下方的資料新增到關注名單。而下方被點選的資料會消失。</h2><h2 id="五、-點選上方關注資料的星號，那筆關注資料會被取消，回到下方的分類資料。"><a href="#五、-點選上方關注資料的星號，那筆關注資料會被取消，回到下方的分類資料。" class="headerlink" title="五、 點選上方關注資料的星號，那筆關注資料會被取消，回到下方的分類資料。"></a>五、 點選上方關注資料的星號，那筆關注資料會被取消，回到下方的分類資料。</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h4</span>&gt;</span>關注城市<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"card-columns"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">county-list</span> <span class="attr">v-for</span>=<span class="string">"(item,key) in stared"</span> <span class="attr">:pm-data</span>=<span class="string">"item"</span> <span class="attr">:key</span>=<span class="string">"key"</span> @<span class="attr">star-click</span>=<span class="string">"toggleFocus"</span>&gt;</span>// 3-1.staredCountystar-click 在這</span><br><span class="line">        <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"fas fa-star"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">county-list</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 城市列表 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"card-columns"</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- 使用 v-for 建議都綁定 :key，以防之後可能會使用到不被快速置換的標籤 --&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- :pm-data="item" 綁定後，就會把 item 在 filterData 讀到的資料傳到 pm-data --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">county-list</span> <span class="attr">v-for</span>=<span class="string">"(item,key) in filterData"</span> <span class="attr">:pm-data</span>=<span class="string">"item"</span> <span class="attr">:key</span>=<span class="string">"key"</span> @<span class="attr">star-click</span>=<span class="string">"toggleFocus"</span>&gt;</span> // 3-2.staredCountystar-click 在這，他會觸發外層的資料 toggleFocus</span><br><span class="line">      <span class="tag">&lt;/<span class="name">county-list</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/x-template"</span> <span class="attr">id</span>=<span class="string">"listTemplate"</span>&gt;</span></span><br><span class="line"><span class="javascript">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"card"</span> :<span class="class"><span class="keyword">class</span></span>=<span class="string">"statusColor"</span>&gt;</span></span><br><span class="line"><span class="handlebars"><span class="xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"card-header"</span>&gt;</span></span><span class="template-variable">&#123;&#123; pmData.County &#125;&#125;</span><span class="xml"> - </span><span class="template-variable">&#123;&#123; pmData.SiteName &#125;&#125;</span></span></span><br><span class="line"><span class="javascript">      &lt;a href=<span class="string">"#"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"float-right"</span> @click.prevent=<span class="string">"staredCounty"</span>&gt; <span class="comment">// 2.staredCounty 在這!!</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;<span class="name">slot</span>&gt;</span></span></span></span><br><span class="line"><span class="javascript">          &lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"far fa-star"</span>&gt;&lt;<span class="regexp">/i&gt;</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">      <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="javascript">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"card-body"</span>&gt;</span></span><br><span class="line"><span class="javascript">      &lt;ul <span class="class"><span class="keyword">class</span></span>=<span class="string">"list-unstyled"</span>&gt;</span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>AQI 指數: </span><span class="template-variable">&#123;&#123; pmData.AQI &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>PM 2.5: </span><span class="template-variable">&#123;&#123; pmData['PM2.5_AVG'] &#125;&#125;</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>說明: </span><span class="template-variable">&#123;&#123; pmData.Status &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">      <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">    </span><span class="template-variable">&#123;&#123; pmData.PublishTime &#125;&#125;</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">Vue.component(<span class="string">'county-list'</span>, &#123;</span></span><br><span class="line"><span class="actionscript">  props:[<span class="string">'pmData'</span>], </span></span><br><span class="line"><span class="actionscript">  template: <span class="string">'#listTemplate'</span>,</span></span><br><span class="line">  methods:&#123;</span><br><span class="line"><span class="actionscript">    staredCounty: <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">      <span class="keyword">this</span>.$emit(<span class="string">'star-click'</span>,<span class="keyword">this</span>.pmData); <span class="comment">// 1. staredCounty 使用 emit 觸發 star-click 外層的資料，同時將 pmData 的資料傳出去</span></span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="actionscript"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line">methods: &#123;</span><br><span class="line"><span class="actionscript">    <span class="comment">//**這邊的 toggleFocus 給加上關注還有取消關注同時使用</span></span></span><br><span class="line"><span class="actionscript">    toggleFocus: <span class="function"><span class="keyword">function</span><span class="params">(focusList)</span></span>&#123; <span class="comment">// 4. focusList 接收到的資料就是來自 (1.) 的 pmData </span></span></span><br><span class="line"><span class="actionscript">        <span class="keyword">const</span> vm = <span class="keyword">this</span>;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">// 5.先去搜尋關注名單裡面有沒有這筆資料</span></span></span><br><span class="line"><span class="actionscript">        <span class="keyword">if</span>(vm.stared.indexOf(focusList) == <span class="number">-1</span>)&#123; <span class="comment">//6. 沒有，加入</span></span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.stared.push(focusList);</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.filterData.splice(<span class="keyword">this</span>.filterData.indexOf(focusList), <span class="number">1</span>); <span class="comment">//7.將資料加入關注名單的同時，要將非關注的資料移除</span></span></span><br><span class="line"><span class="actionscript">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(vm.stared.indexOf(focusList) != <span class="number">-1</span>)&#123; <span class="comment">//8. 有，移除</span></span></span><br><span class="line"><span class="actionscript">        <span class="keyword">this</span>.stared.splice(<span class="keyword">this</span>.stared.indexOf(focusList), <span class="number">1</span>);</span></span><br><span class="line">        if(focusList.County == vm.filter)&#123;  </span><br><span class="line"><span class="actionscript">            <span class="keyword">this</span>.filterData.push(focusList);</span></span><br><span class="line"><span class="actionscript">        &#125;<span class="comment">//9.注意，移除時，要是在同一個縣市的資料才能 push 進去，不然就會發生你頁面在台中市，當你點選取消苗栗縣的關注時，苗栗的這筆資料就會加到台中的非關注頁面</span></span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="六、-特定的空氣品質，給予對應的背景顏色。"><a href="#六、-特定的空氣品質，給予對應的背景顏色。" class="headerlink" title="六、 特定的空氣品質，給予對應的背景顏色。"></a>六、 特定的空氣品質，給予對應的背景顏色。</h2><p>這個我放在 component 裡面直接處理掉，因為它屬於內層的資料</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/x-template"</span> <span class="attr">id</span>=<span class="string">"listTemplate"</span>&gt;</span></span><br><span class="line"><span class="javascript">  &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"card"</span> :<span class="class"><span class="keyword">class</span></span>=<span class="string">"statusColor"</span>&gt;<span class="comment">// 1.這邊動態加上 class 的狀態</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"card-header"</span>&gt;</span></span><span class="template-variable">&#123;&#123; pmData.County &#125;&#125;</span><span class="xml"> - </span><span class="template-variable">&#123;&#123; pmData.SiteName &#125;&#125;</span></span></span><br><span class="line"><span class="javascript">      &lt;a href=<span class="string">"#"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"float-right"</span> @click.prevent=<span class="string">"staredCounty"</span>&gt; <span class="comment">// 2.staredCounty 在這!!</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;<span class="name">slot</span>&gt;</span></span></span></span><br><span class="line"><span class="javascript">          &lt;i <span class="class"><span class="keyword">class</span></span>=<span class="string">"far fa-star"</span>&gt;&lt;<span class="regexp">/i&gt;</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">      <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="javascript">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"card-body"</span>&gt;</span></span><br><span class="line"><span class="javascript">      &lt;ul <span class="class"><span class="keyword">class</span></span>=<span class="string">"list-unstyled"</span>&gt;</span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>AQI 指數: </span><span class="template-variable">&#123;&#123; pmData.AQI &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>PM 2.5: </span><span class="template-variable">&#123;&#123; pmData['PM2.5_AVG'] &#125;&#125;</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>說明: </span><span class="template-variable">&#123;&#123; pmData.Status &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">      <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">    </span><span class="template-variable">&#123;&#123; pmData.PublishTime &#125;&#125;</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">Vue.component(<span class="string">'county-list'</span>, &#123;</span></span><br><span class="line"><span class="actionscript">  props:[<span class="string">'pmData'</span>], </span></span><br><span class="line"><span class="actionscript">  template: <span class="string">'#listTemplate'</span>,</span></span><br><span class="line">  methods:&#123;</span><br><span class="line"><span class="actionscript">    staredCounty: <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">      <span class="keyword">this</span>.$emit(<span class="string">'star-click'</span>,<span class="keyword">this</span>.pmData);</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line"><span class="actionscript">    <span class="comment">//2. 宣告兩個陣列 level、cssColor</span></span></span><br><span class="line"><span class="actionscript">    statusColor: <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> level = [<span class="string">'良好'</span>,<span class="string">'普通'</span>,<span class="string">'對敏感族群不健康'</span>,<span class="string">'對所有族群不健康'</span>,<span class="string">'非常不健康'</span>,<span class="string">'危害'</span>]</span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> cssColor = [<span class="string">''</span>,<span class="string">'status-aqi2'</span>,<span class="string">'status-aqi3'</span>,<span class="string">'status-aqi4'</span>,<span class="string">'status-aqi5'</span>,<span class="string">'status-aqi6'</span>]</span></span><br><span class="line"><span class="actionscript">      <span class="keyword">return</span> cssColor[level.indexOf(<span class="keyword">this</span>.pmData.Status)]; <span class="comment">// 3. 使用 indexOf 去找到資料的狀態，對應 level 的 index，去選擇要對應哪一個顏色</span></span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="七、-將關注的資料儲存到-localStorage-裡，並且網頁下次打開，關注欄也會呈現最新的空污資訊。"><a href="#七、-將關注的資料儲存到-localStorage-裡，並且網頁下次打開，關注欄也會呈現最新的空污資訊。" class="headerlink" title="七、 將關注的資料儲存到 localStorage 裡，並且網頁下次打開，關注欄也會呈現最新的空污資訊。"></a>七、 將關注的資料儲存到 localStorage 裡，並且網頁下次打開，關注欄也會呈現最新的空污資訊。</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    data: [],</span><br><span class="line">    filterData: [],</span><br><span class="line">    location: [],</span><br><span class="line">    stared: [],</span><br><span class="line">    filter: <span class="string">''</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    filterCounty: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">const</span> vm = <span class="keyword">this</span>;</span><br><span class="line">      vm.filterData = [];</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span> ; i&lt;vm.data.length ; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(e.target.value == vm.data[i].County)&#123;</span><br><span class="line">          vm.filter = e.target.value;</span><br><span class="line">          vm.filterData.push(vm.data[i]);</span><br><span class="line">        &#125;;</span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line">      <span class="comment">//4-2. 切換城市時，會將所有這個名稱的城市放到下方未關注的欄位，不管這個城市是否被選取了，這時又得把這個程式寫一次，過濾掉已經被關注的資料</span></span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span> ; i&lt;localStorage.length ; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">0</span>;j&lt;vm.filterData.length;j++)&#123;</span><br><span class="line">          <span class="keyword">if</span>(vm.filterData[j].SiteId == <span class="built_in">JSON</span>.parse(localStorage.getItem(localStorage.key(i))).SiteId)&#123;</span><br><span class="line">            vm.filterData.splice(vm.filterData.indexOf(vm.filterData[j]),<span class="number">1</span>);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    toggleFocus: <span class="function"><span class="keyword">function</span>(<span class="params">focusList</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">const</span> vm = <span class="keyword">this</span>;</span><br><span class="line">     </span><br><span class="line">      <span class="keyword">if</span>(vm.stared.indexOf(focusList) == <span class="number">-1</span>)&#123; </span><br><span class="line">        <span class="keyword">this</span>.stared.push(focusList);</span><br><span class="line">        <span class="keyword">this</span>.filterData.splice(<span class="keyword">this</span>.filterData.indexOf(focusList), <span class="number">1</span>);</span><br><span class="line">        localStorage.setItem(focusList.SiteId,<span class="built_in">JSON</span>.stringify(focusList)); </span><br><span class="line">        <span class="comment">//1. 當加入關注名單時，也將這份名單存到 localStorage，這邊使用的 Key 是此筆資料的 ID，這樣能保有唯一性</span></span><br><span class="line">      &#125;<span class="keyword">else</span> <span class="keyword">if</span>(vm.stared.indexOf(focusList) != <span class="number">-1</span>)&#123; </span><br><span class="line">        <span class="keyword">if</span>(focusList.County == vm.filter)&#123;  </span><br><span class="line">          <span class="keyword">this</span>.filterData.push(focusList);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.stared.splice(<span class="keyword">this</span>.stared.indexOf(focusList), <span class="number">1</span>);</span><br><span class="line">        localStorage.removeItem(focusList.SiteId); </span><br><span class="line">        <span class="comment">// 2. 當取消關注名單時，就將這筆 localStorage 的資料刪除</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  created: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> vm = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">const</span> api = <span class="string">'http://opendata2.epa.gov.tw/AQI.json'</span>;</span><br><span class="line"></span><br><span class="line">    $.<span class="keyword">get</span>(api).then(function( response ) &#123;</span><br><span class="line">      vm.filterData = response;</span><br><span class="line">      vm.data = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(response)); </span><br><span class="line">      </span><br><span class="line">      <span class="comment">//4-1. 每次 AJAX 取資料的時候都會取全部的資料，但重新整理後，已經被標記的資料，不能出現在非關注的城市資料中</span></span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span> ; i&lt;localStorage.length ; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j=<span class="number">0</span>;j&lt;vm.filterData.length;j++)&#123;</span><br><span class="line">          <span class="keyword">if</span>(vm.filterData[j].SiteId == <span class="built_in">JSON</span>.parse(localStorage.getItem(localStorage.key(i))).SiteId)&#123;</span><br><span class="line">            vm.filterData.splice(vm.filterData.indexOf(vm.filterData[j]),<span class="number">1</span>);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      </span><br><span class="line">      <span class="comment">//5.localStorage 同步更新的功能，因為儲存到 localStorage 裡面的資料不會改變，</span></span><br><span class="line">      <span class="comment">//因此，這段程式在每次重新整理的時候，會檢視 localStorage 裡面有什麼資料，他會再去讀取一次 AJAX 上的資料覆蓋上去</span></span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span> ; i&lt;localStorage.length ; i++)&#123;</span><br><span class="line">        <span class="keyword">let</span> updateId = <span class="built_in">JSON</span>.parse(localStorage.getItem(localStorage.key(i))).SiteId;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span> ; j&lt;vm.data.length ; j++)&#123;</span><br><span class="line">          <span class="keyword">if</span>(vm.data[j].SiteId == updateId)&#123;</span><br><span class="line">            localStorage.setItem ( vm.data[j].SiteId , <span class="built_in">JSON</span>.stringify(vm.data[j]) );</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  mounted() &#123;</span><br><span class="line">    <span class="keyword">const</span> vm = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span> ; i&lt;localStorage.length ; i++)&#123;</span><br><span class="line">      vm.stared.push(<span class="built_in">JSON</span>.parse(localStorage.getItem(localStorage.key(i)))); <span class="comment">//重新整理後 push localStorage 的資料</span></span><br><span class="line">    &#125;<span class="comment">//3. 在重新整理後，要將儲存在 localStorage 的資料渲染到畫面上</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="八、bug-修正"><a href="#八、bug-修正" class="headerlink" title="八、bug 修正"></a>八、bug 修正</h2><ul>
+<li>當全部的縣市裡全部的資料都被關注的時候，這時下拉式選單中的這個縣市會消失。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">created: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> vm = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">const</span> api = <span class="string">'http://opendata2.epa.gov.tw/AQI.json'</span>;</span><br><span class="line">    </span><br><span class="line">    $.<span class="keyword">get</span>(api).then(function( response ) &#123;</span><br><span class="line">      vm.filterData = response;</span><br><span class="line">      <span class="comment">//使用物件深拷貝，拷貝一份新的物件，這樣就不會有物件傳參考的問題，如果不拷貝一份物件，當南投區域全部被打星號，跑到關注時，下次重新整理，下拉式選單的南投就會不見</span></span><br><span class="line">      vm.data = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(response)); </span><br><span class="line"></span><br><span class="line">      <span class="comment">//擷取下拉式選單縣市資料，這時的 data 就獨立出來一個陣列，和 response 資料就不會有物件傳參考的問題。</span></span><br><span class="line">      <span class="keyword">let</span> locationArray = [];</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span> ; i&lt;vm.data.length ; i++)&#123;</span><br><span class="line">        locationArray.push(vm.data[i].County);</span><br><span class="line">      &#125;</span><br><span class="line">      vm.location = locationArray.filter(<span class="function"><span class="keyword">function</span>(<span class="params">element,index,array</span>)</span>&#123; <span class="comment">//原本我直接用 indexOf(response.County),但 indexOf 不能用在物件裡面的值。</span></span><br><span class="line">        <span class="keyword">return</span> array.indexOf(element) === index;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%88%B7%E9%A1%8C/" rel="tag"># 刷題</a>
+          
+            <a href="/tags/Vue-%E8%AA%B2%E7%A8%8B%E4%BD%9C%E6%A5%AD/" rel="tag"># Vue 課程作業</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Project/20200219/4253087110/" rel="next" title="[全台黑客松-口罩地圖]">
+                <i class="fa fa-chevron-left"></i> [全台黑客松-口罩地圖]
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="Pai" />
+            
+              <p class="site-author-name" itemprop="name">Pai</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#壹、作業目標"><span class="nav-number">1.</span> <span class="nav-text">壹、作業目標</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#貳、前言"><span class="nav-number">2.</span> <span class="nav-text">貳、前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#參、程式發想流程"><span class="nav-number">3.</span> <span class="nav-text">參、程式發想流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#肆、程式撰寫細節"><span class="nav-number">4.</span> <span class="nav-text">肆、程式撰寫細節</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、-撈出空汙-JSON-的資料呈現在畫面上。"><span class="nav-number">4.1.</span> <span class="nav-text">一、 撈出空汙 JSON 的資料呈現在畫面上。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、-將各縣市的資料撈出來過濾，去除重複的縣市。"><span class="nav-number">4.2.</span> <span class="nav-text">二、 將各縣市的資料撈出來過濾，去除重複的縣市。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、-選擇下拉式選單縣市，下方呈現出對應的縣市空污資料。"><span class="nav-number">4.3.</span> <span class="nav-text">三、 選擇下拉式選單縣市，下方呈現出對應的縣市空污資料。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、-點選星號，可以將下方的資料新增到關注名單。而下方被點選的資料會消失。"><span class="nav-number">4.4.</span> <span class="nav-text">四、 點選星號，可以將下方的資料新增到關注名單。而下方被點選的資料會消失。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、-點選上方關注資料的星號，那筆關注資料會被取消，回到下方的分類資料。"><span class="nav-number">4.5.</span> <span class="nav-text">五、 點選上方關注資料的星號，那筆關注資料會被取消，回到下方的分類資料。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、-特定的空氣品質，給予對應的背景顏色。"><span class="nav-number">4.6.</span> <span class="nav-text">六、 特定的空氣品質，給予對應的背景顏色。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、-將關注的資料儲存到-localStorage-裡，並且網頁下次打開，關注欄也會呈現最新的空污資訊。"><span class="nav-number">4.7.</span> <span class="nav-text">七、 將關注的資料儲存到 localStorage 裡，並且網頁下次打開，關注欄也會呈現最新的空污資訊。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、bug-修正"><span class="nav-number">4.8.</span> <span class="nav-text">八、bug 修正</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">歡迎轉載，轉載請附上來源和網址連結</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

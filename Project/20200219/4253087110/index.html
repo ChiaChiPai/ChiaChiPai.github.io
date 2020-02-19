@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-TW">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,AJAX,Leaflet" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="使用 leaflet + OSM 實作口罩地圖一、 leaflet 基礎使用leaflet網站">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[全台黑客松-口罩地圖]">
+<meta property="og:url" content="http://pai.github.io/Project/20200219/4253087110/index.html">
+<meta property="og:site_name" content="Pai 的 F2E 前端養成手札">
+<meta property="og:description" content="使用 leaflet + OSM 實作口罩地圖一、 leaflet 基礎使用leaflet網站">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-02-19T09:50:14.000Z">
+<meta property="article:modified_time" content="2020-02-19T11:51:28.481Z">
+<meta property="article:author" content="Pai">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="AJAX">
+<meta property="article:tag" content="Leaflet">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pai.github.io/Project/20200219/4253087110/"/>
+
+
+
+
+
+  <title>[全台黑客松-口罩地圖] | Pai 的 F2E 前端養成手札</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', '[object Object]', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+  <meta name="google-site-verification" content="dMCcogjLcZzAwEC7kHMUbRZyNPyutGupoNtCuW94v_I" />
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Pai 的 F2E 前端養成手札</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-首頁">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分類">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-檔案">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            檔案
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-posts" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pai.github.io/Project/20200219/4253087110/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Pai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Pai 的 F2E 前端養成手札">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">[全台黑客松-口罩地圖]</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-19T17:50:14+08:00">
+                2020-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Project/" itemprop="url" rel="index">
+                    <span itemprop="name">刷題篇</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="使用-leaflet-OSM-實作口罩地圖"><a href="#使用-leaflet-OSM-實作口罩地圖" class="headerlink" title="使用 leaflet + OSM 實作口罩地圖"></a>使用 leaflet + OSM 實作口罩地圖</h1><h2 id="一、-leaflet-基礎使用"><a href="#一、-leaflet-基礎使用" class="headerlink" title="一、 leaflet 基礎使用"></a>一、 leaflet 基礎使用</h2><p><a href="https://leafletjs.com/" target="_blank" rel="noopener">leaflet網站</a></p>
+<a id="more"></a>
+<h3 id="1-載入-Css-及-JavaScript"><a href="#1-載入-Css-及-JavaScript" class="headerlink" title="1.載入 Css 及 JavaScript"></a>1.載入 Css 及 JavaScript</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel&#x3D;&quot;stylesheet&quot; href&#x3D;&quot;https:&#x2F;&#x2F;unpkg.com&#x2F;leaflet@1.6.0&#x2F;dist&#x2F;leaflet.css&quot; &gt;</span><br><span class="line">&lt;!-- Make sure you put this AFTER Leaflet&#39;s CSS --&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;unpkg.com&#x2F;leaflet@1.6.0&#x2F;dist&#x2F;leaflet.js&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="2-Html-綁定-id"><a href="#2-Html-綁定-id" class="headerlink" title="2. Html 綁定 id"></a>2. Html 綁定 id</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;map&quot;&gt;&lt;div&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="3-CSS-設定寬高"><a href="#3-CSS-設定寬高" class="headerlink" title="3. CSS 設定寬高"></a>3. CSS 設定寬高</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">html,body&#123;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 100%;</span><br><span class="line">&#125;</span><br><span class="line">#map &#123;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 100%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-JaveScript-語法設定"><a href="#4-JaveScript-語法設定" class="headerlink" title="4. JaveScript 語法設定"></a>4. JaveScript 語法設定</h3><ul>
+<li>設定地圖的中心位置及縮放比例<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var map &#x3D; L.map(&#39;map&#39;).setView([22.604799,120.2976256</span><br><span class="line">], 13);</span><br><span class="line">&#x2F;&#x2F;L.map(&#39;(綁定id)&#39;).setView([經緯度],縮放比例)</span><br></pre></td></tr></table></figure></li>
+<li>設定使用的地圖，這邊使用的是OSM<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">L.tileLayer(&#39;https:&#x2F;&#x2F;&#123;s&#125;.tile.openstreetmap.org&#x2F;&#123;z&#125;&#x2F;&#123;x&#125;&#x2F;&#123;y&#125;.png&#39;, &#123;</span><br><span class="line">attribution: &#39;&amp;copy; &lt;a href&#x3D;&quot;https:&#x2F;&#x2F;www.openstreetmap.org&#x2F;copyright&quot;&gt;OpenStreetMap&lt;&#x2F;a&gt; contributors&#39;</span><br><span class="line">&#125;).addTo(map);</span><br></pre></td></tr></table></figure></li>
+<li>在地圖上加上標籤<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var marker &#x3D; L.marker([51.5, -0.09]).addTo(mymap);</span><br></pre></td></tr></table></figure></li>
+<li>在地圖上加上範圍<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 多邊形</span><br><span class="line">var polygon &#x3D; L.polygon([</span><br><span class="line">[23.956052,120.685992],</span><br><span class="line">[23.976052,120.665992],</span><br><span class="line">[23.936052,120.655992]</span><br><span class="line">]).addTo(map);</span><br><span class="line">&#x2F;&#x2F; 圓形</span><br><span class="line">var circle &#x3D; L.circle([23.976052,120.685992], &#123;</span><br><span class="line">color: &#39;red&#39;,</span><br><span class="line">fillColor: &#39;#f03&#39;,</span><br><span class="line">fillOpacity: 0.5,</span><br><span class="line">radius: 500</span><br><span class="line">&#125;).addTo(map);</span><br></pre></td></tr></table></figure></li>
+<li>為範圍及標示加上註解<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">marker.bindPopup(&quot;&lt;b&gt;Hello world!&lt;&#x2F;b&gt;&lt;br&gt;I am a popup.&quot;).openPopup(); </span><br><span class="line">circle.bindPopup(&quot;I am a circle.&quot;); </span><br><span class="line">polygon.bindPopup(&quot;I am a polygon.&quot;);</span><br></pre></td></tr></table></figure>
+<h2 id="二、改變標示座標的顏色"><a href="#二、改變標示座標的顏色" class="headerlink" title="二、改變標示座標的顏色"></a>二、改變標示座標的顏色</h2></li>
+<li>插入外部設計者的標籤<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var greenIcon &#x3D; new L.Icon(&#123;</span><br><span class="line">  iconUrl: &#39;https:&#x2F;&#x2F;cdn.rawgit.com&#x2F;pointhi&#x2F;leaflet-color-markers&#x2F;master&#x2F;img&#x2F;marker-icon-2x-green.png&#39;,</span><br><span class="line">  shadowUrl: &#39;https:&#x2F;&#x2F;cdnjs.cloudflare.com&#x2F;ajax&#x2F;libs&#x2F;leaflet&#x2F;0.7.7&#x2F;images&#x2F;marker-shadow.png&#39;,</span><br><span class="line">  iconSize: [25, 41],</span><br><span class="line">  iconAnchor: [12, 41],</span><br><span class="line">  popupAnchor: [1, -34],</span><br><span class="line">  shadowSize: [41, 41]</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">L.marker([51.5, -0.09], &#123;icon: greenIcon&#125;).addTo(map);</span><br></pre></td></tr></table></figure>
+<h2 id="三、-加入多個地標"><a href="#三、-加入多個地標" class="headerlink" title="三、 加入多個地標"></a>三、 加入多個地標</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var data &#x3D; [</span><br><span class="line">  &#123;&#39;name&#39;:&#39;愛荔枝樂園&#39;,lat:24.0053725,lng:120.6275244&#125;,</span><br><span class="line">  &#123;&#39;name&#39;:&#39;黃金風鈴木&#39;,lat:24.0057594,lng:120.6290734&#125;</span><br><span class="line">]</span><br><span class="line">for(let i &#x3D;0;data.length&gt;i;i++)&#123;</span><br><span class="line">  L.marker([data[i].lat,data[i].lng], &#123;icon:       </span><br><span class="line">  greenIcon&#125;).addTo(map).bindPopup(&#39;&lt;h1&gt;&#39;+ data[i].name +&#39;&lt;&#x2F;p&gt;&#39;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="四、-使用-MarkerClusterGroup-增加效能"><a href="#四、-使用-MarkerClusterGroup-增加效能" class="headerlink" title="四、 使用 MarkerClusterGroup 增加效能"></a>四、 使用 MarkerClusterGroup 增加效能</h2>為了不讓六千多筆資料一次顯示，使用 MarkerClusterGroup 將資料變成範圍性的數字，使用者有需要再去點開想看的區域。<br><a href="https://github.com/Leaflet/Leaflet.markercluster" target="_blank" rel="noopener">MarkerClusterGroup連結</a><h3 id="1-加入CDN"><a href="#1-加入CDN" class="headerlink" title="1. 加入CDN"></a>1. 加入CDN</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;CSS</span><br><span class="line">&lt;link href&#x3D;&quot;https:&#x2F;&#x2F;unpkg.com&#x2F;leaflet.markercluster@1.4.1&#x2F;dist&#x2F;MarkerCluster.css&quot;&gt;&lt;&#x2F;link&gt;</span><br><span class="line">&lt;link href&#x3D;&quot;https:&#x2F;&#x2F;unpkg.com&#x2F;leaflet.markercluster@1.4.1&#x2F;dist&#x2F;MarkerCluster.Default.css&quot;&gt;&lt;&#x2F;link&gt;</span><br><span class="line">&#x2F;&#x2F;JS</span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;unpkg.com&#x2F;leaflet.markercluster@1.4.1&#x2F;dist&#x2F;leaflet.markercluster.js&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="2-建立-L-MarkerClusterGroup-的圖層"><a href="#2-建立-L-MarkerClusterGroup-的圖層" class="headerlink" title="2. 建立 L.MarkerClusterGroup() 的圖層"></a>2. 建立 L.MarkerClusterGroup() 的圖層</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var data &#x3D; [</span><br><span class="line">&#123;&#39;name&#39;:&#39;愛荔枝樂園&#39;,lat:24.0053725,lng:120.6275244&#125;,</span><br><span class="line">&#123;&#39;name&#39;:&#39;黃金風鈴木&#39;,lat:24.0057594,lng:120.6290734&#125;</span><br><span class="line">]</span><br><span class="line">var markers &#x3D; new L.MarkerClusterGroup();</span><br><span class="line">for(let i &#x3D;0;data.length&gt;i;i++)&#123;</span><br><span class="line">markers.addLayer(L.marker([data[i].lat,data[i].lng], &#123;icon: greenIcon&#125;)); &#x2F;&#x2F;將 L.mark(地標) 的圖層放到 makers 上面</span><br><span class="line">&#125;</span><br><span class="line">map.addLayer(markers); &#x2F;&#x2F;將 markers 放到 map 的圖層上</span><br></pre></td></tr></table></figure></li>
+<li>所以這邊的圖層會變成:</li>
+<li> - - - - - -<br>L.mark(地標) 上</li>
+<li> - - - - - -<br>markers 中</li>
+<li> - - - - - -<br>map 下</li>
+<li> - - - - - -</li>
+</ul>
+<h2 id="五、-使用-AJAX-串接資料"><a href="#五、-使用-AJAX-串接資料" class="headerlink" title="五、 使用 AJAX 串接資料"></a>五、 使用 AJAX 串接資料</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var xhr &#x3D; new XMLHttpRequest();</span><br><span class="line">&#x2F;&#x2F;開啟一個XML的網路請求</span><br><span class="line">xhr.open(&quot;get&quot;,&quot;https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;kiang&#x2F;pharmacies&#x2F;master&#x2F;json&#x2F;points.json&quot;);</span><br><span class="line">跟網址上的伺服器要資料</span><br><span class="line">xhr.send();</span><br><span class="line">&#x2F;&#x2F;執行要資料的動作</span><br><span class="line">xhr.onload &#x3D; function()&#123;</span><br><span class="line">&#x2F;&#x2F;當資料回傳完後，下面的函式會觸發</span><br><span class="line">var data &#x3D; JSON.parse(xhr.responseText).features;</span><br><span class="line">&#x2F;&#x2F;將得到的資料轉換成物件的格式</span><br><span class="line">for(let i &#x3D;0;data.length&gt;i;i++)&#123;</span><br><span class="line">markers.addLayer(L.marker([data[i].geometry.coordinates[1],data[i].geometry.coordinates[0]], &#123;icon: greenIcon &#125;).bindPopup(&#39;&lt;h1&gt;&#39;+data[i].properties.name+&#39;&lt;&#x2F;h1&gt;&#39;+&#39;&lt;p&gt;成人口罩數量&#39;+data[i].properties.mask_adult+&#39;&lt;&#x2F;p&gt;&#39;));</span><br><span class="line">&#125;;</span><br><span class="line">map.addLayer(markers);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="六、-使用-HTML5-Geolocation-來辨識目前位置"><a href="#六、-使用-HTML5-Geolocation-來辨識目前位置" class="headerlink" title="六、 使用 HTML5 Geolocation 來辨識目前位置"></a>六、 使用 HTML5 Geolocation 來辨識目前位置</h2><h3 id="1-先判斷目前瀏覽器支不支援定位功能"><a href="#1-先判斷目前瀏覽器支不支援定位功能" class="headerlink" title="1.先判斷目前瀏覽器支不支援定位功能"></a>1.先判斷目前瀏覽器支不支援定位功能</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if (navigator.geolocation) &#123;</span><br><span class="line">navigator.geolocation.getCurrentPosition(showPosition, showError);</span><br><span class="line">&#125; else &#123;</span><br><span class="line">alert(&quot;您的瀏覽器不支援定位系統&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-沒有-error-code-就呼叫-showPosition"><a href="#2-沒有-error-code-就呼叫-showPosition" class="headerlink" title="2. 沒有 error.code 就呼叫 showPosition()"></a>2. 沒有 error.code 就呼叫 showPosition()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function showPosition(position)&#123;</span><br><span class="line">let map &#x3D;       </span><br><span class="line"> L.map(&#39;map&#39;).setView([position.coords.latitude,position.coords.long</span><br><span class="line"> itude], position.zoom || 15);</span><br><span class="line">:</span><br><span class="line">:</span><br><span class="line">:</span><br><span class="line">:</span><br><span class="line"> 要執行的程式碼</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-有-error-code-就呼叫-showError"><a href="#3-有-error-code-就呼叫-showError" class="headerlink" title="3. 有 error.code 就呼叫 showError()"></a>3. 有 error.code 就呼叫 showError()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">function showError(error)&#123;</span><br><span class="line">let position &#x3D; &#123; &#x2F;&#x2F;做一筆資料讓讀取不到目前位置時使用</span><br><span class="line">  coords: &#123;</span><br><span class="line">    latitude: &#39;23.8523405&#39;,</span><br><span class="line">    longitude: &#39;120.9009427&#39;,</span><br><span class="line">  &#125;,</span><br><span class="line">  zoom: 7, &#x2F;&#x2F;讀取不到位置時縮放的範圍</span><br><span class="line">&#125;</span><br><span class="line">switch(error.code) &#123;</span><br><span class="line">  case error.PERMISSION_DENIED:</span><br><span class="line">    alert(&quot;讀取不到您目前的位置&quot;);</span><br><span class="line">    showPosition(position);</span><br><span class="line">    break;</span><br><span class="line">  case error.POSITION_UNAVAILABLE:</span><br><span class="line">    alert(&quot;讀取不到您目前的位置&quot;);</span><br><span class="line">    showPosition(position);</span><br><span class="line">    break;</span><br><span class="line">  case error.TIMEOUT:</span><br><span class="line">    alert(&quot;讀取位置逾時&quot;);</span><br><span class="line">    showPosition(position);</span><br><span class="line">    break;</span><br><span class="line">  case error.UNKNOWN_ERROR:</span><br><span class="line">    alert(&quot;Error&quot;);</span><br><span class="line">    showPosition(position);</span><br><span class="line">    break;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="七、按下回到目前位置按鈕"><a href="#七、按下回到目前位置按鈕" class="headerlink" title="七、按下回到目前位置按鈕"></a>七、按下回到目前位置按鈕</h2><ul>
+<li>這段程式要放在 showPosition 的函式中，在執行 navigator.geolocation 後，目前位置的座標會存在這個函式中。<br>在使用一次 setView 找回中心點。<br>我有看到其他人是使用 map.panTo()，但是當我加上 map.setZoom時，發現他只能一次執行一個動作，他都得第一次把地圖放大後，第二次點才能去回到目前位置。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let goBackPosition &#x3D; document.querySelector(&#39;.js-goBackPosition&#39;);</span><br><span class="line">goBackPosition.addEventListener(&#39;click&#39;,function()&#123;</span><br><span class="line">  map.setView([position.coords.latitude,position.coords.longitude],   </span><br><span class="line">  position.zoom || 17);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="八、日期往後推七天"><a href="#八、日期往後推七天" class="headerlink" title="八、日期往後推七天"></a>八、日期往後推七天</h2><p>由於「this」即是指定的時間物件，因此就使用 this 取得「日」再加 7 天，最後將這個更新後的日期設定給這個時間物件即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Date.prototype.addDays &#x3D; function(days) &#123;</span><br><span class="line">this.setDate(this.getDate() + days);</span><br><span class="line">return this;</span><br><span class="line">&#125;</span><br><span class="line">let nextDay &#x3D; dt.addDays(7);</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%88%B7%E9%A1%8C/" rel="tag"># 刷題</a>
+          
+            <a href="/tags/%E5%8F%A3%E7%BD%A9%E5%9C%B0%E5%9C%96/" rel="tag"># 口罩地圖</a>
+          
+            <a href="/tags/%E6%AD%A6%E6%BC%A2%E8%82%BA%E7%82%8E/" rel="tag"># 武漢肺炎</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Project/20200219/35964132/" rel="next" title="[js 地下層 3F - 計算機]">
+                <i class="fa fa-chevron-left"></i> [js 地下層 3F - 計算機]
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="Pai" />
+            
+              <p class="site-author-name" itemprop="name">Pai</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用-leaflet-OSM-實作口罩地圖"><span class="nav-number">1.</span> <span class="nav-text">使用 leaflet + OSM 實作口罩地圖</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、-leaflet-基礎使用"><span class="nav-number">1.1.</span> <span class="nav-text">一、 leaflet 基礎使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-載入-Css-及-JavaScript"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.載入 Css 及 JavaScript</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Html-綁定-id"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. Html 綁定 id</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-CSS-設定寬高"><span class="nav-number">1.1.3.</span> <span class="nav-text">3. CSS 設定寬高</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-JaveScript-語法設定"><span class="nav-number">1.1.4.</span> <span class="nav-text">4. JaveScript 語法設定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、改變標示座標的顏色"><span class="nav-number">1.2.</span> <span class="nav-text">二、改變標示座標的顏色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、-加入多個地標"><span class="nav-number">1.3.</span> <span class="nav-text">三、 加入多個地標</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、-使用-MarkerClusterGroup-增加效能"><span class="nav-number">1.4.</span> <span class="nav-text">四、 使用 MarkerClusterGroup 增加效能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-加入CDN"><span class="nav-number">1.4.1.</span> <span class="nav-text">1. 加入CDN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-建立-L-MarkerClusterGroup-的圖層"><span class="nav-number">1.4.2.</span> <span class="nav-text">2. 建立 L.MarkerClusterGroup() 的圖層</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、-使用-AJAX-串接資料"><span class="nav-number">1.5.</span> <span class="nav-text">五、 使用 AJAX 串接資料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、-使用-HTML5-Geolocation-來辨識目前位置"><span class="nav-number">1.6.</span> <span class="nav-text">六、 使用 HTML5 Geolocation 來辨識目前位置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-先判斷目前瀏覽器支不支援定位功能"><span class="nav-number">1.6.1.</span> <span class="nav-text">1.先判斷目前瀏覽器支不支援定位功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-沒有-error-code-就呼叫-showPosition"><span class="nav-number">1.6.2.</span> <span class="nav-text">2. 沒有 error.code 就呼叫 showPosition()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-有-error-code-就呼叫-showError"><span class="nav-number">1.6.3.</span> <span class="nav-text">3. 有 error.code 就呼叫 showError()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、按下回到目前位置按鈕"><span class="nav-number">1.7.</span> <span class="nav-text">七、按下回到目前位置按鈕</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、日期往後推七天"><span class="nav-number">1.8.</span> <span class="nav-text">八、日期往後推七天</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">歡迎轉載，轉載請附上來源和網址連結</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

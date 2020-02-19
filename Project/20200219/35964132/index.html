@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-TW">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="js地下城,JavaScript" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="JS地下城 3F 計算機UI設計稿 在做這個作業前，可以先把計算機上的按鈕做分類，哪些按鈕按下是要幹嘛的，另外就是一些使用上的順序，方不方便，我是開啟 windows 的計算機看他是怎麼設計的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[js 地下層 3F - 計算機]">
+<meta property="og:url" content="http://pai.github.io/Project/20200219/35964132/index.html">
+<meta property="og:site_name" content="Pai 的 F2E 前端養成手札">
+<meta property="og:description" content="JS地下城 3F 計算機UI設計稿 在做這個作業前，可以先把計算機上的按鈕做分類，哪些按鈕按下是要幹嘛的，另外就是一些使用上的順序，方不方便，我是開啟 windows 的計算機看他是怎麼設計的。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1200/1*L_ru2LcfKa4GYrnNWEGL2g.png">
+<meta property="article:published_time" content="2020-02-19T09:48:18.000Z">
+<meta property="article:modified_time" content="2020-02-19T11:51:26.421Z">
+<meta property="article:author" content="Pai">
+<meta property="article:tag" content="js地下城">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn-images-1.medium.com/max/1200/1*L_ru2LcfKa4GYrnNWEGL2g.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://pai.github.io/Project/20200219/35964132/"/>
+
+
+
+
+
+  <title>[js 地下層 3F - 計算機] | Pai 的 F2E 前端養成手札</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', '[object Object]', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+  <meta name="google-site-verification" content="dMCcogjLcZzAwEC7kHMUbRZyNPyutGupoNtCuW94v_I" />
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Pai 的 F2E 前端養成手札</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-首頁">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分類">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-檔案">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            檔案
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-posts" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pai.github.io/Project/20200219/35964132/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Pai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Pai 的 F2E 前端養成手札">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">[js 地下層 3F - 計算機]</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-19T17:48:18+08:00">
+                2020-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Project/" itemprop="url" rel="index">
+                    <span itemprop="name">刷題篇</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="JS地下城-3F-計算機"><a href="#JS地下城-3F-計算機" class="headerlink" title="JS地下城 3F 計算機"></a>JS地下城 3F 計算機</h1><h2 id="UI設計稿"><a href="#UI設計稿" class="headerlink" title="UI設計稿"></a>UI設計稿</h2><p><img src="https://cdn-images-1.medium.com/max/1200/1*L_ru2LcfKa4GYrnNWEGL2g.png" alt="Ima"></p>
+<p>在做這個作業前，可以先把計算機上的按鈕做分類，哪些按鈕按下是要幹嘛的，另外就是一些使用上的順序，方不方便，我是開啟 windows 的計算機看他是怎麼設計的。</p>
+<a id="more"></a>
+<h2 id="一、分類"><a href="#一、分類" class="headerlink" title="一、分類"></a>一、分類</h2><h3 id="1-數字-0-不能出現在小數點前重複出現，不然會出現，像-000-1"><a href="#1-數字-0-不能出現在小數點前重複出現，不然會出現，像-000-1" class="headerlink" title="1. 數字 : 0 不能出現在小數點前重複出現，不然會出現，像 000.1"></a>1. 數字 : 0 不能出現在小數點前重複出現，不然會出現，像 000.1</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> calResultStr == <span class="string">''</span> &amp;&amp; buffer == <span class="string">'00'</span> || calResultStr == <span class="string">'0'</span> &amp;&amp; buffer == <span class="string">'00'</span>: </span><br><span class="line"><span class="comment">//如果下排為空且輸入的數值是 00 或下排為 0 且輸入的數值是 00，那下排只能出現 0</span></span><br><span class="line">calResultStr = <span class="string">'0'</span>;</span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> calResultStr.indexOf(<span class="string">'0'</span>) == <span class="number">0</span> &amp;&amp; <span class="built_in">isNaN</span>(<span class="built_in">parseInt</span>(buffer)+<span class="number">1</span>) == <span class="literal">false</span>:</span><br><span class="line"><span class="comment">//如果下排 0 在第一個位置且後面輸入的數值為數字，就用後面輸入的數字取代 0</span></span><br><span class="line">calResultStr = buffer;</span><br><span class="line"><span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="2-運算符號-−-×÷-運算符號，不得重複，像-1×÷2"><a href="#2-運算符號-−-×÷-運算符號，不得重複，像-1×÷2" class="headerlink" title="2. 運算符號+ − ×÷ : 運算符號，不得重複，像:1×÷2="></a>2. 運算符號+ − ×÷ : 運算符號，不得重複，像:1×÷2=</h3><p>isNaN(parseInt(calContentStr.charAt(calContentStr.length-1))+1)</p>
+<p>使用 charAt 去找 calContentStr 字串的最後一個字元，將這個字元轉換成數字後再 +1，判斷它是不是 NaN。如果是 NaN 代表他不是數字不能做算數。<br>calContentStr.substring(0,calContentStr.length-1)</p>
+<p>將 calContentStr 字串的最後一個字元刪除。<br>case buffer == ‘+’: //在按下按鈕得到的值是 +-x÷ 的情況下<br>case buffer == ‘-‘:<br>case buffer == ‘×’:<br>case buffer == ‘÷’:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">calContentStr += calResultStr; <span class="comment">//按下加減乘除後，才把結果欄的值丟到運算欄</span></span><br><span class="line">calResultStr = <span class="string">''</span>; <span class="comment">//然後把結果欄清空</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//如果上排calContentStr最後一個字元是'+-×÷'，而且輸入的值也是'+-×÷'，就用輸入的值取代最後一個字元</span></span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">isNaN</span>(<span class="built_in">parseInt</span>(calContentStr.charAt(calContentStr.length<span class="number">-1</span>))+<span class="number">1</span>) == <span class="literal">true</span>)&#123;</span><br><span class="line"><span class="comment">//如果運算列的最後一個字元不是數字時</span></span><br><span class="line">calContentStr = calContentStr.substring(<span class="number">0</span>,calContentStr.length<span class="number">-1</span>);</span><br><span class="line"><span class="comment">//將最後運算列的最後一個字元刪除</span></span><br><span class="line">calContentStr += buffer;</span><br><span class="line"><span class="comment">//新增案件按下的運算符號</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">calContentStr = calContentStr + buffer;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">break</span>;<span class="comment">//完成這個case後，跳出這個switch</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-等號-eval-得到運算結果"><a href="#3-等號-eval-得到運算結果" class="headerlink" title="3. 等號 = : eval 得到運算結果"></a>3. 等號 = : eval 得到運算結果</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> buffer == <span class="string">'='</span>: <span class="comment">//如果按下按鈕得到的值是'='</span></span><br><span class="line">calContentStr += calResultStr; <span class="comment">//把下排的值丟到上排</span></span><br><span class="line">calContentStr += buffer; <span class="comment">//讓運算列加入'='，方便之後判斷用</span></span><br><span class="line"><span class="keyword">let</span> calResultContent = calContentStr.replace(<span class="regexp">/×/ig</span>, <span class="string">"*"</span>); <span class="comment">//將this取到的x÷替換成可以運算的符號</span></span><br><span class="line">calResultContent = calResultContent.replace(<span class="regexp">/÷/ig</span>, <span class="string">"/"</span>);</span><br><span class="line">calResultContent = calResultContent.substring(<span class="number">0</span>,calResultContent.length<span class="number">-1</span>); <span class="comment">//進行eval計算前記得把'='拿掉</span></span><br><span class="line">calResultStr = <span class="built_in">parseFloat</span>(<span class="built_in">eval</span>(calResultContent).toFixed(<span class="number">10</span>));<span class="comment">//因為 JS 運算是依循 IEEE754 的規範，在運算時會轉換成 2 進制，而浮點數在轉成二進制時會造成無窮迴圈，進而產生運算誤差，JS 有對此有.toFixed語法來處理浮點數問題</span></span><br><span class="line"><span class="keyword">break</span>;<span class="comment">//完成這個 case 後，跳出這個 switch</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-⌫-刪除單一字元"><a href="#4-⌫-刪除單一字元" class="headerlink" title="4. ⌫ : 刪除單一字元"></a>4. ⌫ : 刪除單一字元</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> buffer == <span class="string">'⌫'</span>:<span class="comment">//如果值是⌫就把上排的值清掉，然後把下排的值退格一個字元</span></span><br><span class="line">calContentStr = <span class="string">''</span>;</span><br><span class="line">calResultStr = calResultStr.toString();</span><br><span class="line"><span class="comment">//因為calResultStr經過eval計算出來是'number'，而下方的substring運用必須為'string'</span></span><br><span class="line">calResultStr = calResultStr.substring(<span class="number">0</span>,calResultStr.length<span class="number">-1</span>);</span><br><span class="line"><span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-AC-清除的功能"><a href="#5-AC-清除的功能" class="headerlink" title="5. AC : 清除的功能"></a>5. AC : 清除的功能</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> buffer == <span class="string">'AC'</span>: <span class="comment">//如果值是AC就把上下排的值都清掉</span></span><br><span class="line">calContentStr = <span class="string">''</span>;</span><br><span class="line">calResultStr = <span class="string">''</span>;</span><br><span class="line"><span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-點-點在一個數值中不能重複出現，不然-0-22-33-33-這樣運算會出問題"><a href="#6-點-點在一個數值中不能重複出現，不然-0-22-33-33-這樣運算會出問題" class="headerlink" title="6. 點. : 點在一個數值中不能重複出現，不然 0.22.33+33= 這樣運算會出問題"></a>6. 點. : 點在一個數值中不能重複出現，不然 0.22.33+33= 這樣運算會出問題</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> calResultStr.indexOf(<span class="string">'.'</span>) != <span class="number">-1</span>: <span class="comment">//如果calResultStr字串內有.</span></span><br><span class="line"><span class="keyword">if</span>(buffer == <span class="string">'.'</span>)&#123;</span><br><span class="line">calResultStr += <span class="string">''</span>;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">calResultStr += buffer;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="二、使用者體驗"><a href="#二、使用者體驗" class="headerlink" title="二、使用者體驗"></a>二、使用者體驗</h2><h3 id="1-在按下等號得到答案後，如何進行之後的運算"><a href="#1-在按下等號得到答案後，如何進行之後的運算" class="headerlink" title="1. 在按下等號得到答案後，如何進行之後的運算?"></a>1. 在按下等號得到答案後，如何進行之後的運算?</h3><ul>
+<li>按下數字時，清除全部，開始另一個新的運算。</li>
+<li>按下加減乘除時，保留上排數值，繼續做運算。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> calContentStr.charAt(calContentStr.length<span class="number">-1</span>) == <span class="string">'='</span>: <span class="comment">//判斷等號'='後面接什麼動作，會觸發什麼情況</span></span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">isNaN</span>(<span class="built_in">parseInt</span>(buffer)+<span class="number">1</span>) == <span class="literal">false</span>)&#123; <span class="comment">//如果後面是數字，就直接把全部清空，重新開始另一個算式</span></span><br><span class="line">calContentStr = <span class="string">''</span>;</span><br><span class="line">calResultStr = <span class="string">''</span>;</span><br><span class="line">calResultStr += buffer;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'aaaa3'</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(buffer == <span class="string">"+"</span> || buffer == <span class="string">'-'</span> || buffer == <span class="string">'×'</span> || buffer == <span class="string">'÷'</span>)&#123;<span class="comment">//如果是加減乘除，就把'='刪除，加上運算符號直接再做運算</span></span><br><span class="line">calContentStr = calContentStr.substring(<span class="number">0</span>,calContentStr.length<span class="number">-1</span>);</span><br><span class="line">calContentStr += buffer;</span><br><span class="line">calResultStr = <span class="string">''</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-數字超過計算機大小時，使文字變小"><a href="#2-數字超過計算機大小時，使文字變小" class="headerlink" title="2. 數字超過計算機大小時，使文字變小"></a>2. 數字超過計算機大小時，使文字變小</h3><p>要注意計算字串長度時，因為計算機的答案是經過 eval 計算出來的，為 ‘number’ ，因此要轉為字串我們才能統一計算字串長度大於多少時將字體大小轉換。<br>一開始我把 calResultStr 和 calContentStr 放在同一個switch裡面，但這樣會發生他只執行上面的 calResultStr 完後就跳出了， calContentStr 在下面會執行不到。所以要把兩個內容分開判斷。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> resultCheck = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">calResultStr = calResultStr.toString(); <span class="comment">//因為eval計算出來是數值，而我們這邊是用字串做運算的</span></span><br><span class="line"><span class="keyword">switch</span>(<span class="literal">true</span>)&#123;</span><br><span class="line"><span class="keyword">case</span> calResultStr.length &gt; <span class="number">9</span> &amp;&amp; calResultStr.length &lt;= <span class="number">27</span>:</span><br><span class="line">  calResult.setAttribute(<span class="string">'style'</span>,<span class="string">'font-size: 20px'</span>);</span><br><span class="line">  <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> calResultStr.length &gt; <span class="number">27</span>:</span><br><span class="line">  calResult.setAttribute(<span class="string">'style'</span>,<span class="string">'font-size: 12px'</span>);</span><br><span class="line">  <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> calResultStr.length &lt;= <span class="number">9</span>:</span><br><span class="line">  calResult.setAttribute(<span class="string">'style'</span>,<span class="string">'font-size: 56px'</span>);</span><br><span class="line">  <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> contentCheck = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">switch</span>(<span class="literal">true</span>)&#123;</span><br><span class="line"><span class="keyword">case</span> calContentStr.length &gt; <span class="number">33</span>:</span><br><span class="line">  calContent.setAttribute(<span class="string">'style'</span>,<span class="string">'font-size: 10px'</span>);</span><br><span class="line">  <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> calContentStr.length &lt;= <span class="number">33</span>:</span><br><span class="line">  calContent.setAttribute(<span class="string">'style'</span>,<span class="string">'font-size: 16px'</span>);</span><br><span class="line">  <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-標示出千分位，提升閱讀體驗"><a href="#3-標示出千分位，提升閱讀體驗" class="headerlink" title="3. 標示出千分位，提升閱讀體驗"></a>3. 標示出千分位，提升閱讀體驗</h3><p>這個函式大量用到 slice 的語法來切分字串。<br>因為計算機會有小數點的問題，這邊設計小數點以下不標是千分位符號。<br>因此這個函式分為兩個判斷，一個是有小數點的，一個是沒有小數點的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">toThousands</span>(<span class="params">number</span>) </span>&#123;</span><br><span class="line"><span class="keyword">let</span> num = number.toString();</span><br><span class="line"><span class="keyword">let</span> result = <span class="string">''</span>;</span><br><span class="line"><span class="keyword">if</span>(num.indexOf(<span class="string">'.'</span>) != <span class="number">-1</span>)&#123;  <span class="comment">//如果這個字串有小數點</span></span><br><span class="line">  <span class="comment">//將這個字串分成小數點前的numBeforeDot和包含小數點後的numAfterDot</span></span><br><span class="line">  <span class="keyword">let</span> numBeforeDot = num.slice(<span class="number">0</span>,num.indexOf(<span class="string">'.'</span>)); </span><br><span class="line">  <span class="keyword">let</span> numAfterDot = num.slice(num.indexOf(<span class="string">'.'</span>),num.length);</span><br><span class="line"><span class="keyword">while</span> (numBeforeDot.length &gt; <span class="number">3</span>) &#123; </span><br><span class="line">  <span class="comment">//當num.length &gt; 3時，就一直執行下面的內容，直到num.length &lt;= 3</span></span><br><span class="line">  result = <span class="string">','</span> + numBeforeDot.slice(<span class="number">-3</span>) + result;</span><br><span class="line">  numBeforeDot = numBeforeDot.slice(<span class="number">0</span>, numBeforeDot.length - <span class="number">3</span>);</span><br><span class="line">&#125;</span><br><span class="line">  result = numBeforeDot + result + numAfterDot;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123; <span class="comment">//其他的是沒有小數點的字串</span></span><br><span class="line">  <span class="keyword">while</span> (num.length &gt; <span class="number">3</span>) &#123; <span class="comment">//當num.length &gt; 3時，就一直執行下面的內容</span></span><br><span class="line">  result = <span class="string">','</span> + num.slice(<span class="number">-3</span>) + result;</span><br><span class="line">  num = num.slice(<span class="number">0</span>, num.length - <span class="number">3</span>);</span><br><span class="line">&#125;</span><br><span class="line">  result = num + result;</span><br><span class="line">&#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、這個關卡學到的技能整理"><a href="#三、這個關卡學到的技能整理" class="headerlink" title="三、這個關卡學到的技能整理"></a>三、這個關卡學到的技能整理</h2><h3 id="1-switch內case擺放的位置"><a href="#1-switch內case擺放的位置" class="headerlink" title="1. switch內case擺放的位置"></a>1. switch內case擺放的位置</h3><p>這個關卡只使用到一個function，所有的運算都寫在裡面了，但function中為了不影響網站效率，使用switch，使用switch時，放置case的前後順序就很重要了，因為只要有一個case符合條件，跑完條件下的內容就會跳出了，如果有要先判斷的就要擺在前面。</p>
+<h3 id="2-小數點運算時，浮點數的問題"><a href="#2-小數點運算時，浮點數的問題" class="headerlink" title="2. 小數點運算時，浮點數的問題"></a>2. 小數點運算時，浮點數的問題</h3><p>因為JS運算是依循IEEE754的規範，在運算時會轉換成2進制，而浮點數在轉成二進制時會造成無窮迴圈，進而產生運算誤差，JS有對此有.toFixed語法來處理浮點數問題。<br>parseFloat(number.toFixed(10))<br>number.toFixed(10)這邊是把數值四捨五入取到小數點後第10位，然後用parseFloat把小數點後0多的值去掉。</p>
+<ul>
+<li>還有另一個更精準的方法: number-precision</li>
+</ul>
+<p>開啟命令提示字元，路徑切換到要使用 number-precision 的資料夾下，輸入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install number-precision --save</span><br></pre></td></tr></table></figure>
+<p>在 Html 的網頁導入，number-precision JS 語法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"node_modules/number-precision/build/index.umd.js"</span>&gt;&lt;<span class="regexp">/script&gt; /</span><span class="regexp">/放在all.js前面才讀取的到</span></span><br><span class="line"><span class="regexp">&lt;script src="js/</span>all.js<span class="string">"&gt;&lt;/script&gt; //all.js是我主要撰寫的檔案</span></span><br></pre></td></tr></table></figure>
+<p>就可以使用 number-precision 功能了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(NP.strip(<span class="number">0.100000000000009</span>));</span><br><span class="line"><span class="comment">//result: 0.1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-字串與字串方法"><a href="#3-字串與字串方法" class="headerlink" title="3. 字串與字串方法"></a>3. 字串與字串方法</h3><ul>
+<li>length</li>
+</ul>
+<p>取得字串長度</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'123456'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.length);</span><br><span class="line"><span class="comment">//result: 6</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>indexOf( searchElement, fromIndex)</li>
+</ul>
+<p>由’前’往後搜尋字串<br>searchElement : 搜尋的字串<br>fromIndex : 搜尋範圍，預設為字串長度 (str.length)-1，也就是全部範圍</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> demo = <span class="string">'abc123abc'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(demo.indexOf(<span class="string">'abc'</span>));</span><br><span class="line"><span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>lastIndexOf( searchElement, fromIndex)</li>
+</ul>
+<p>由’後’往前搜尋字串<br>searchElement : 搜尋的字串<br>fromIndex : 搜尋範圍，預設為字串長度 (str.length)-1，也就是全部範圍</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> demo = <span class="string">'abc123abc'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(demo.lastIndexOf(<span class="string">'abc'</span>));</span><br><span class="line"><span class="comment">// result: 6</span></span><br><span class="line"><span class="built_in">console</span>.log(demo.lastIndexOf(<span class="string">'abc'</span>,<span class="number">5</span>));</span><br><span class="line"><span class="comment">// result: 0</span></span><br><span class="line"><span class="built_in">console</span>.log(demo.lastIndexOf(<span class="string">'abc'</span>,<span class="number">7</span>));</span><br><span class="line"><span class="comment">// result: 6</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>search(Str)</li>
+</ul>
+<p>尋找字串， 無相符字串則傳回 -1<br>Str : 尋找的字串</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">"ABC and abc"</span></span><br><span class="line"><span class="built_in">console</span>.log(str.search(<span class="string">"abc"</span>)); <span class="comment">//大小必需相符</span></span><br><span class="line"><span class="comment">// result 8</span></span><br><span class="line"><span class="built_in">console</span>.log(str.search(<span class="regexp">/abc/i</span>)); <span class="comment">//忽略大小寫</span></span><br><span class="line"><span class="comment">// result 結果 0</span></span><br><span class="line"><span class="built_in">console</span>.log(str.search(<span class="string">"123"</span>));</span><br><span class="line"><span class="comment">// result -1</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>match(Str)</li>
+</ul>
+<p>查找符合的字串，並回傳字串內容， 無相符字串則傳回 null<br>Str : 尋找的字串</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">"The rain in SPAIN stays mainly in the plain"</span>;</span><br><span class="line"><span class="comment">// 尋找符合的字串位置(/ain/)</span></span><br><span class="line"><span class="built_in">console</span>.log(str.match(<span class="regexp">/ain/</span>));</span><br><span class="line"> <span class="comment">// result: ain</span></span><br><span class="line"><span class="comment">// 重覆尋找符合的字串位置(/***/g)</span></span><br><span class="line"><span class="built_in">console</span>.log(str.match(<span class="regexp">/ain/g</span>));</span><br><span class="line"> <span class="comment">// result: ain,ain,ain</span></span><br><span class="line"><span class="comment">// 重覆尋找符合的字串位置(不分大小寫 /***/gi)</span></span><br><span class="line"><span class="built_in">console</span>.log(str.match(<span class="regexp">/ain/gi</span>));</span><br><span class="line"> <span class="comment">// result: ain,AIN,ain,ain</span></span><br><span class="line"><span class="built_in">console</span>.log(str.match(<span class="string">'123'</span>));</span><br><span class="line"> <span class="comment">// result: -1</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>charAt(index)</li>
+</ul>
+<p>傳回字串內的某個字元</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'012345678'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.charAt(<span class="number">2</span>));</span><br><span class="line"><span class="comment">//2</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>fromCharCode()</li>
+</ul>
+<p>傳回由UTF-16代表的字元</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>.fromCharCode(<span class="number">65</span>,<span class="number">66</span>,<span class="number">67</span>));</span><br><span class="line"><span class="comment">//result: ABC</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>substring( indexStart, indexEnd)</li>
+</ul>
+<p>indexStart: 開始位置<br>endStart: 結束位置，實際則取到結束位置的前一個字元<br>substr(index , strLength)</p>
+<p>index: 開始位置<br>strLength: 取的字串長度<br>傳回字串中指定區間的字串</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'0123456789'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.substring(<span class="number">2</span>,<span class="number">5</span>));</span><br><span class="line"><span class="comment">// result: 234</span></span><br><span class="line"><span class="built_in">console</span>.log(str.substr(<span class="number">2</span>,<span class="number">5</span>));</span><br><span class="line"><span class="comment">// result: 23456</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>slice( start , end )</li>
+</ul>
+<p>start : 從 0 開始的索引值<br>end : 結束值，實際取的是結束的前一個值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'e'</span>];</span><br><span class="line"><span class="keyword">var</span> str1 = str.slice(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">var</span> str2 = str.slice(<span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line"><span class="keyword">var</span> str3 = str.slice(<span class="number">-3</span>);</span><br><span class="line"><span class="comment">// str  ['a', 'b', 'c', 'd', 'e'];</span></span><br><span class="line"><span class="comment">// str1 ['b', 'c', 'd', 'e'];</span></span><br><span class="line"><span class="comment">// str2 ['b', 'c']; 雖然end值3是指d，但實際上不包含d的值</span></span><br><span class="line"><span class="comment">// str3 ['c', 'd', 'e'];</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>replace(searchStr, replaceStr)</li>
+</ul>
+<p>searchStr : 字串中要被取代掉的字串<br>replaceStr : 替換的字串</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"hello world"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.replace(<span class="string">'hello'</span>,<span class="string">'goodbye'</span>));</span><br><span class="line"><span class="comment">//result: "goodbye world";</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>concat(stringA,stringB,…,stringX)</li>
+</ul>
+<p>組合字串</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> strA = <span class="string">"test "</span>;</span><br><span class="line"><span class="keyword">var</span> strB = <span class="string">"String"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(strA.concat(strB));</span><br><span class="line"><span class="comment">// result: test String</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>split( )</li>
+</ul>
+<p>將字串轉換為陣列</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'Hello sunny'</span>;</span><br><span class="line"><span class="keyword">var</span> strArray = str.split(<span class="string">''</span>);</span><br><span class="line"><span class="built_in">console</span>.log(strArray[<span class="number">0</span>]);</span><br><span class="line"><span class="comment">//result: H</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>toUpperCase() </li>
+<li>toLowerCase()</li>
+</ul>
+<p>變更字串大小寫</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'abCD'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.toUpperCase());</span><br><span class="line"><span class="comment">//result: abcd</span></span><br><span class="line"><span class="built_in">console</span>.log(str.toLowerCase());</span><br><span class="line"><span class="comment">//result: ABCD</span></span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%88%B7%E9%A1%8C/" rel="tag"># 刷題</a>
+          
+            <a href="/tags/js-%E5%9C%B0%E4%B8%8B%E5%9F%8E/" rel="tag"># js 地下城</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Project/20200219/3130903905/" rel="next" title="[js 地下城 2F - 時鐘]">
+                <i class="fa fa-chevron-left"></i> [js 地下城 2F - 時鐘]
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Project/20200219/4253087110/" rel="prev" title="[全台黑客松-口罩地圖]">
+                [全台黑客松-口罩地圖] <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="Pai" />
+            
+              <p class="site-author-name" itemprop="name">Pai</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JS地下城-3F-計算機"><span class="nav-number">1.</span> <span class="nav-text">JS地下城 3F 計算機</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#UI設計稿"><span class="nav-number">1.1.</span> <span class="nav-text">UI設計稿</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、分類"><span class="nav-number">1.2.</span> <span class="nav-text">一、分類</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-數字-0-不能出現在小數點前重複出現，不然會出現，像-000-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 數字 : 0 不能出現在小數點前重複出現，不然會出現，像 000.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-運算符號-−-×÷-運算符號，不得重複，像-1×÷2"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 運算符號+ − ×÷ : 運算符號，不得重複，像:1×÷2&#x3D;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-等號-eval-得到運算結果"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. 等號 &#x3D; : eval 得到運算結果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-⌫-刪除單一字元"><span class="nav-number">1.2.4.</span> <span class="nav-text">4. ⌫ : 刪除單一字元</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-AC-清除的功能"><span class="nav-number">1.2.5.</span> <span class="nav-text">5. AC : 清除的功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-點-點在一個數值中不能重複出現，不然-0-22-33-33-這樣運算會出問題"><span class="nav-number">1.2.6.</span> <span class="nav-text">6. 點. : 點在一個數值中不能重複出現，不然 0.22.33+33&#x3D; 這樣運算會出問題</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、使用者體驗"><span class="nav-number">1.3.</span> <span class="nav-text">二、使用者體驗</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-在按下等號得到答案後，如何進行之後的運算"><span class="nav-number">1.3.1.</span> <span class="nav-text">1. 在按下等號得到答案後，如何進行之後的運算?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-數字超過計算機大小時，使文字變小"><span class="nav-number">1.3.2.</span> <span class="nav-text">2. 數字超過計算機大小時，使文字變小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-標示出千分位，提升閱讀體驗"><span class="nav-number">1.3.3.</span> <span class="nav-text">3. 標示出千分位，提升閱讀體驗</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、這個關卡學到的技能整理"><span class="nav-number">1.4.</span> <span class="nav-text">三、這個關卡學到的技能整理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-switch內case擺放的位置"><span class="nav-number">1.4.1.</span> <span class="nav-text">1. switch內case擺放的位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-小數點運算時，浮點數的問題"><span class="nav-number">1.4.2.</span> <span class="nav-text">2. 小數點運算時，浮點數的問題</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-字串與字串方法"><span class="nav-number">1.4.3.</span> <span class="nav-text">3. 字串與字串方法</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">歡迎轉載，轉載請附上來源和網址連結</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

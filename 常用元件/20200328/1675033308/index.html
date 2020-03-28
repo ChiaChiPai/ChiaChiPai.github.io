@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Vue,JavaScript" />
 
 
 
@@ -79,22 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://pai.github.io/tags/index.html">
+<meta name="description" content="title: ‘製作網頁分頁的方法’disqus: Pai  壹、Vue 版本 - computed + 取餘數法使用 computed 將每筆資料在陣列中全都做出來，在使用分頁切換去讀取個個物件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用元件-實作分頁的方法">
+<meta property="og:url" content="http://pai.github.io/%E5%B8%B8%E7%94%A8%E5%85%83%E4%BB%B6/20200328/1675033308/index.html">
 <meta property="og:site_name" content="Pai 的 F2E 前端養成手札">
+<meta property="og:description" content="title: ‘製作網頁分頁的方法’disqus: Pai  壹、Vue 版本 - computed + 取餘數法使用 computed 將每筆資料在陣列中全都做出來，在使用分頁切換去讀取個個物件">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2020-02-15T07:56:17.000Z">
-<meta property="article:modified_time" content="2020-02-15T07:56:49.962Z">
+<meta property="article:published_time" content="2020-03-28T02:20:17.000Z">
+<meta property="article:modified_time" content="2020-03-28T02:23:52.558Z">
 <meta property="article:author" content="Pai">
-<meta property="article:tag" content="JavaScript">
-<meta property="article:tag" content="CSS">
-<meta property="article:tag" content="HTML">
-<meta property="article:tag" content="Bootstrap">
-<meta property="article:tag" content="RWD">
 <meta property="article:tag" content="Vue">
-<meta property="article:tag" content="Git">
-<meta property="article:tag" content="Github">
+<meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
 
 
@@ -125,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://pai.github.io/tags/"/>
+  <link rel="canonical" href="http://pai.github.io/常用元件/20200328/1675033308/"/>
 
 
 
 
 
-  <title>tags | Pai 的 F2E 前端養成手札</title>
+  <title>常用元件-實作分頁的方法 | Pai 的 F2E 前端養成手札</title>
   
 
 
@@ -290,40 +286,179 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-posts" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://pai.github.io/%E5%B8%B8%E7%94%A8%E5%85%83%E4%BB%B6/20200328/1675033308/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Pai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Pai 的 F2E 前端養成手札">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">tags</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                8 tags in total
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/JavaScript/" style="font-size: 12px; color: #ccc">JavaScript</a> <a href="/tags/Vue/" style="font-size: 12px; color: #ccc">Vue</a> <a href="/tags/Vue-%E8%AA%B2%E7%A8%8B%E4%BD%9C%E6%A5%AD/" style="font-size: 12px; color: #ccc">Vue 課程作業</a> <a href="/tags/js-%E5%9C%B0%E4%B8%8B%E5%9F%8E/" style="font-size: 21px; color: #6f6f6f">js 地下城</a> <a href="/tags/%E5%88%B7%E9%A1%8C/" style="font-size: 30px; color: #111">刷題</a> <a href="/tags/%E5%8F%A3%E7%BD%A9%E5%9C%B0%E5%9C%96/" style="font-size: 12px; color: #ccc">口罩地圖</a> <a href="/tags/%E5%B8%B8%E7%94%A8%E5%85%83%E4%BB%B6/" style="font-size: 12px; color: #ccc">常用元件</a> <a href="/tags/%E6%AD%A6%E6%BC%A2%E8%82%BA%E7%82%8E/" style="font-size: 12px; color: #ccc">武漢肺炎</a>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">常用元件-實作分頁的方法</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-28T10:20:17+08:00">
+                2020-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B8%B8%E7%94%A8%E5%85%83%E4%BB%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">常用元件</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <hr>
+<p>title: ‘製作網頁分頁的方法’<br>disqus: Pai</p>
+<hr>
+<h1 id="壹、Vue-版本-computed-取餘數法"><a href="#壹、Vue-版本-computed-取餘數法" class="headerlink" title="壹、Vue 版本 - computed + 取餘數法"></a>壹、Vue 版本 - computed + 取餘數法</h1><p>使用 computed 將每筆資料在陣列中全都做出來，在使用分頁切換去讀取個個物件</p>
+<a id="more"></a>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">data:&#123;</span><br><span class="line">  dataArr: &#123;&#125;; <span class="comment">// AJAX 資料已經存進來</span></span><br><span class="line">  currentPage: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用 computed 做分頁</span></span><br><span class="line"></span><br><span class="line">computed: &#123;</span><br><span class="line">  filterDataArr() &#123;</span><br><span class="line">    cosnt vm = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">const</span> newArr= &#123;&#125;;</span><br><span class="line">    vm.dataArr.forEach(<span class="function">(<span class="params">item,index</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span>(index % <span class="number">10</span> === <span class="number">0</span>)&#123; <span class="comment">// % 10 代表每一個分頁有 10 筆的資料</span></span><br><span class="line">        newArr.push([]);  <span class="comment">// 假設資料有 100 筆，就會做出 10 個空陣列來存放每一頁的資料</span></span><br><span class="line">      &#125; </span><br><span class="line">      <span class="keyword">const</span> page = <span class="built_in">parseInt</span>(index / <span class="number">10</span>); </span><br><span class="line">      <span class="comment">// 用來計算有幾頁，假如是 0~9筆的資料，他就會存放在 newArr[0] 裡面</span></span><br><span class="line">      newArr[page].push(item)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> newArr</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因此，就可以在 html 裡面放入相對應的資料</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 網頁呈現資料 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">v-for</span>=<span class="string">'item in filterDataArr[currentPage]'</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>名字: &#123;&#123; item.name &#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>電話: &#123;&#123; item.phone &#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--分頁--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"page-item"</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">:class</span>=<span class="string">"&#123;'active': currentPage = page-1&#125;"</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">v-for</span>=<span class="string">"page in filterDataArr.length"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"page-link"</span> @<span class="attr">click.prevent</span>=<span class="string">"currentPage = page-1"</span>&gt;</span>&#123;&#123; page &#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="貳、Vue-版本-使用-filter"><a href="#貳、Vue-版本-使用-filter" class="headerlink" title="貳、Vue 版本 - 使用 filter"></a>貳、Vue 版本 - 使用 filter</h1><p>透過 filter 回傳的資料，每次過濾不同分頁的資料</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">data:&#123;</span><br><span class="line">  data: []; <span class="comment">// AJAX 資料已經存進來</span></span><br><span class="line">  currentPage: <span class="number">0</span>;</span><br><span class="line">  pageContent: [],<span class="comment">//過濾後存放資料的地方</span></span><br><span class="line">  page: <span class="number">0</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">created() &#123;</span><br><span class="line">  <span class="keyword">const</span> vm = <span class="keyword">this</span></span><br><span class="line">  vm.page = data.length/<span class="number">10</span>; <span class="comment">// 計算出這筆資料有幾頁</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//按下頁碼切換數字</span></span><br><span class="line">changePage (page = <span class="number">1</span>) &#123; <span class="comment">// 頁數預設是在第一頁</span></span><br><span class="line">  <span class="keyword">const</span> vm = <span class="keyword">this</span></span><br><span class="line">  vm.currentPage = page</span><br><span class="line">  vm.pageContent = vm.fbContent.filter(<span class="function">(<span class="params">item, index</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> index &lt; page * <span class="number">10</span> &amp;&amp; index &gt;= (page - <span class="number">1</span>) * <span class="number">10</span> </span><br><span class="line">    <span class="comment">// 如果是第一頁就回傳 0~9 筆的資料</span></span><br><span class="line">    <span class="comment">// 第二頁就是 10~19 筆的資料 </span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>HTML 部分</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 網頁呈現資料 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">v-for</span>=<span class="string">'item in pageContent'</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>名字: &#123;&#123; item.name &#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>電話: &#123;&#123; item.phone &#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 頁數分頁 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"page-item"</span> <span class="attr">:class</span>=<span class="string">"&#123;'active':item === currentPage&#125;"</span> <span class="attr">v-for</span>=<span class="string">"item in page"</span> <span class="attr">:key</span>=<span class="string">"item"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"page-link"</span> <span class="attr">href</span>=<span class="string">"#"</span> @<span class="attr">click.prevent</span>=<span class="string">"changePage(item)"</span>&gt;</span>&#123;&#123; item &#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%B8%B8%E7%94%A8%E5%85%83%E4%BB%B6/" rel="tag"># 常用元件</a>
+          
+            <a href="/tags/Vue/" rel="tag"># Vue</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/javascript/20200325/3189483925/" rel="next" title="[ES6 展開運算子(Spread Operator)、其餘參數(Rest Operator)]">
+                <i class="fa fa-chevron-left"></i> [ES6 展開運算子(Spread Operator)、其餘參數(Rest Operator)]
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -356,8 +491,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -421,6 +565,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#壹、Vue-版本-computed-取餘數法"><span class="nav-number">1.</span> <span class="nav-text">壹、Vue 版本 - computed + 取餘數法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#貳、Vue-版本-使用-filter"><span class="nav-number">2.</span> <span class="nav-text">貳、Vue 版本 - 使用 filter</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

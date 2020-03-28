@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="title: ‘製作網頁分頁的方法’disqus: Pai  壹、Vue 版本 - computed + 取餘數法使用 computed 將每筆資料在陣列中全都做出來，在使用分頁切換去讀取個個物件">
+<meta name="description" content="壹、Vue 版本 - computed + 取餘數法使用 computed 將每筆資料在陣列中全都做出來，在使用分頁切換去讀取個個物件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="常用元件-實作分頁的方法">
 <meta property="og:url" content="http://pai.github.io/%E5%B8%B8%E7%94%A8%E5%85%83%E4%BB%B6/20200328/1675033308/index.html">
 <meta property="og:site_name" content="Pai 的 F2E 前端養成手札">
-<meta property="og:description" content="title: ‘製作網頁分頁的方法’disqus: Pai  壹、Vue 版本 - computed + 取餘數法使用 computed 將每筆資料在陣列中全都做出來，在使用分頁切換去讀取個個物件">
+<meta property="og:description" content="壹、Vue 版本 - computed + 取餘數法使用 computed 將每筆資料在陣列中全都做出來，在使用分頁切換去讀取個個物件">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2020-03-28T02:20:17.000Z">
-<meta property="article:modified_time" content="2020-03-28T02:23:52.558Z">
+<meta property="article:modified_time" content="2020-03-28T02:26:35.145Z">
 <meta property="article:author" content="Pai">
 <meta property="article:tag" content="Vue">
 <meta property="article:tag" content="JavaScript">
@@ -387,10 +387,7 @@
       
 
       
-        <hr>
-<p>title: ‘製作網頁分頁的方法’<br>disqus: Pai</p>
-<hr>
-<h1 id="壹、Vue-版本-computed-取餘數法"><a href="#壹、Vue-版本-computed-取餘數法" class="headerlink" title="壹、Vue 版本 - computed + 取餘數法"></a>壹、Vue 版本 - computed + 取餘數法</h1><p>使用 computed 將每筆資料在陣列中全都做出來，在使用分頁切換去讀取個個物件</p>
+        <h1 id="壹、Vue-版本-computed-取餘數法"><a href="#壹、Vue-版本-computed-取餘數法" class="headerlink" title="壹、Vue 版本 - computed + 取餘數法"></a>壹、Vue 版本 - computed + 取餘數法</h1><p>使用 computed 將每筆資料在陣列中全都做出來，在使用分頁切換去讀取個個物件</p>
 <a id="more"></a>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">data:&#123;</span><br><span class="line">  dataArr: &#123;&#125;; <span class="comment">// AJAX 資料已經存進來</span></span><br><span class="line">  currentPage: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用 computed 做分頁</span></span><br><span class="line"></span><br><span class="line">computed: &#123;</span><br><span class="line">  filterDataArr() &#123;</span><br><span class="line">    cosnt vm = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">const</span> newArr= &#123;&#125;;</span><br><span class="line">    vm.dataArr.forEach(<span class="function">(<span class="params">item,index</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span>(index % <span class="number">10</span> === <span class="number">0</span>)&#123; <span class="comment">// % 10 代表每一個分頁有 10 筆的資料</span></span><br><span class="line">        newArr.push([]);  <span class="comment">// 假設資料有 100 筆，就會做出 10 個空陣列來存放每一頁的資料</span></span><br><span class="line">      &#125; </span><br><span class="line">      <span class="keyword">const</span> page = <span class="built_in">parseInt</span>(index / <span class="number">10</span>); </span><br><span class="line">      <span class="comment">// 用來計算有幾頁，假如是 0~9筆的資料，他就會存放在 newArr[0] 裡面</span></span><br><span class="line">      newArr[page].push(item)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> newArr</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>因此，就可以在 html 裡面放入相對應的資料</p>

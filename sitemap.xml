@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://pai.github.io/vue/20200329/3873901904/</loc>
+    
+    <lastmod>2020-03-29T16:04:14.894Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://pai.github.io/ES6/20200328/565821282/</loc>
+    
+    <lastmod>2020-03-29T15:59:57.416Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://pai.github.io/%E5%B8%B8%E7%94%A8%E5%85%83%E4%BB%B6/20200325/1675033308/</loc>
     
     <lastmod>2020-03-29T08:51:07.547Z</lastmod>
@@ -12,13 +26,6 @@
     <loc>http://pai.github.io/javascript/20200327/1076886642/</loc>
     
     <lastmod>2020-03-29T08:51:00.368Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://pai.github.io/ES6/20200329/565821282/</loc>
-    
-    <lastmod>2020-03-29T08:49:13.425Z</lastmod>
     
   </url>
   

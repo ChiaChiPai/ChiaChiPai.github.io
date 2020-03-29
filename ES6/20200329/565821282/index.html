@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="深拷貝, 淺拷貝, JavaScript" />
+  <meta name="keywords" content="ES6, JavaScript" />
 
 
 
@@ -79,18 +79,17 @@
 
 
 
-<meta name="description" content="關於陣列的拷貝關於陣列的拷貝可以分為淺拷貝與深拷貝  淺拷貝: 淺拷貝可以完全複製一維陣列中的字串、數值..等等的資料。但如果有包含巢狀的資料，如物件、陣列、函式等等…，就無法複製。 深拷貝: 可以無視一維或巢狀資料，完全複製一個一模一樣的陣列。">
+<meta name="description" content="以下陣列的操作會以這個陣列作為範例">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深拷貝與淺拷貝">
-<meta property="og:url" content="http://pai.github.io/javascript/20200328/1076886642/index.html">
+<meta property="og:title" content="ES6 陣列常用的操作方法">
+<meta property="og:url" content="http://pai.github.io/ES6/20200329/565821282/index.html">
 <meta property="og:site_name" content="Pai 的 F2E 前端養成手札">
-<meta property="og:description" content="關於陣列的拷貝關於陣列的拷貝可以分為淺拷貝與深拷貝  淺拷貝: 淺拷貝可以完全複製一維陣列中的字串、數值..等等的資料。但如果有包含巢狀的資料，如物件、陣列、函式等等…，就無法複製。 深拷貝: 可以無視一維或巢狀資料，完全複製一個一模一樣的陣列。">
+<meta property="og:description" content="以下陣列的操作會以這個陣列作為範例">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2020-03-28T09:32:04.000Z">
-<meta property="article:modified_time" content="2020-03-29T05:48:09.139Z">
+<meta property="article:published_time" content="2020-03-29T08:35:18.000Z">
+<meta property="article:modified_time" content="2020-03-29T08:41:10.547Z">
 <meta property="article:author" content="Pai">
-<meta property="article:tag" content="深拷貝">
-<meta property="article:tag" content=" 淺拷貝">
+<meta property="article:tag" content="ES6">
 <meta property="article:tag" content=" JavaScript">
 <meta name="twitter:card" content="summary">
 
@@ -122,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://pai.github.io/javascript/20200328/1076886642/"/>
+  <link rel="canonical" href="http://pai.github.io/ES6/20200329/565821282/"/>
 
 
 
 
 
-  <title>深拷貝與淺拷貝 | Pai 的 F2E 前端養成手札</title>
+  <title>ES6 陣列常用的操作方法 | Pai 的 F2E 前端養成手札</title>
   
 
 
@@ -299,7 +298,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://pai.github.io/javascript/20200328/1076886642/">
+    <link itemprop="mainEntityOfPage" href="http://pai.github.io/ES6/20200329/565821282/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Pai">
@@ -316,7 +315,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">深拷貝與淺拷貝</h1>
+          <h1 class="post-title" itemprop="name headline">ES6 陣列常用的操作方法</h1>
         
 
         <div class="post-meta">
@@ -328,8 +327,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-28T17:32:04+08:00">
-                2020-03-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-29T16:35:18+08:00">
+                2020-03-29
               </time>
             
 
@@ -351,8 +350,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javascript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
+                  <a href="/categories/ES6/" itemprop="url" rel="index">
+                    <span itemprop="name">ES6</span>
                   </a>
                 </span>
 
@@ -388,39 +387,88 @@
       
 
       
-        <h1 id="關於陣列的拷貝"><a href="#關於陣列的拷貝" class="headerlink" title="關於陣列的拷貝"></a>關於陣列的拷貝</h1><p>關於陣列的拷貝可以分為淺拷貝與深拷貝</p>
-<ul>
-<li>淺拷貝: 淺拷貝可以完全複製一維陣列中的字串、數值..等等的資料。但如果有包含巢狀的資料，如物件、陣列、函式等等…，就無法複製。</li>
-<li>深拷貝: 可以無視一維或巢狀資料，完全複製一個一模一樣的陣列。<a id="more"></a>
-<h2 id="一、淺拷貝-shadow-copy-的方法"><a href="#一、淺拷貝-shadow-copy-的方法" class="headerlink" title="一、淺拷貝 (shadow copy) 的方法"></a>一、淺拷貝 (shadow copy) 的方法</h2><h3 id="1-使用展開-spread-運算子"><a href="#1-使用展開-spread-運算子" class="headerlink" title="1. 使用展開 (spread) 運算子"></a>1. 使用展開 (spread) 運算子</h3>使用展開運算子將陣列分解，然後重組的特行進行淺拷貝<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> array = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>]</span><br><span class="line"><span class="keyword">let</span> newArray = [...array]</span><br><span class="line">newArray.push(<span class="string">'d'</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(array) <span class="comment">// ["a", "b", "c"]</span></span><br><span class="line"><span class="built_in">console</span>.log(newArray) <span class="comment">// ["a", "b", "c", "d"]</span></span><br></pre></td></tr></table></figure>
-<h3 id="2-使用-slice"><a href="#2-使用-slice" class="headerlink" title="2. 使用 slice"></a>2. 使用 slice</h3>slice 原本用於將陣列分隔出來使用，但如果 slice 後的參數為 0 或不加參數，就可做淺拷貝使用。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> array = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>]</span><br><span class="line"><span class="keyword">let</span> newArray = array.slice(<span class="number">0</span>) <span class="comment">// or let newArray = array.slice()</span></span><br><span class="line">newArray.push(<span class="string">'d'</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(array) <span class="comment">// ["a", "b", "c"]</span></span><br><span class="line"><span class="built_in">console</span>.log(newArray) <span class="comment">// ["a", "b", "c", "d"]</span></span><br></pre></td></tr></table></figure>
+        <p>以下陣列的操作會以這個陣列作為範例</p>
+<a id="more"></a>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> menuOrder = [</span><br><span class="line">    &#123;</span><br><span class="line">      mother: <span class="string">'Mary'</span>,</span><br><span class="line">      eat: <span class="string">'乾麵'</span>,</span><br><span class="line">      price: <span class="number">40</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      son: <span class="string">'Peter'</span>,</span><br><span class="line">      eat: <span class="string">'炸醬面'</span>,</span><br><span class="line">      price: <span class="number">60</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      father: <span class="string">'Tom'</span>,</span><br><span class="line">      eat: <span class="string">'酸辣湯餃'</span>,</span><br><span class="line">      price: <span class="number">70</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h2 id="一、forEach"><a href="#一、forEach" class="headerlink" title="一、forEach"></a>一、forEach</h2><h3 id="1-forEach-的使用方法"><a href="#1-forEach-的使用方法" class="headerlink" title="1. forEach 的使用方法"></a>1. forEach 的使用方法</h3><p>forEach 功能基本與 for 迴圈相同，但使用 forEach 可以更為簡短。</p>
+<blockquote>
+<p>Array.prototype.forEach(function(item, index, array){<br>  // 直接操作陣列中的每一個值 //<br>})</p>
+</blockquote>
+<p><strong>item: 陣列中成員的值</strong><br><strong>index: 陣列中成員的索引</strong><br><strong>array: 代表整個陣列</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">menuOrder.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item,index</span>)</span>&#123;</span><br><span class="line">    item.price = <span class="number">0</span>; <span class="comment">// 遍歷每一個 item 的 price 值，將每一個 price 改為零</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(menuOrder) <span class="comment">// 付完錢了，價錢全部變成零</span></span><br></pre></td></tr></table></figure>
 
+<h3 id="2-使用-forEach-需要注意到的"><a href="#2-使用-forEach-需要注意到的" class="headerlink" title="2. 使用 forEach 需要注意到的"></a>2. 使用 forEach 需要注意到的</h3><ul>
+<li><p>forEach 功能基本與 for 迴圈相同，但使用 forEach 可以更為簡短，但如果需要<strong>中斷迴圈</strong>(break) 還是得使用 for 迴圈才能操作。</p>
+</li>
+<li><p>forEach 的執行放在 callBack Function 中，使用 <strong>this</strong> 的話必須注意會指定到 <strong>windows</strong></p>
+</li>
+<li><p>forEach 沒有<strong>回傳值</strong> return</p>
+</li>
+<li><p>forEach 不會迭代之前建立的陣列，也就是說，如果在陣列跑到一半，原始陣列改變了，forEach 也只會照著目前跑到的索引值指示繼續跑。</p>
 </li>
 </ul>
-<h3 id="3-使用-concat"><a href="#3-使用-concat" class="headerlink" title="3. 使用 concat"></a>3. 使用 concat</h3><p>concat 原本使用在合併陣列，這邊可以使用一個空陣列合併要被複製的陣列達成淺拷貝的功能。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> array = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>]</span><br><span class="line"><span class="keyword">let</span> newArray = [].concat(array)</span><br><span class="line">newArray.push(<span class="string">'d'</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(array) <span class="comment">// ["a", "b", "c"]</span></span><br><span class="line"><span class="built_in">console</span>.log(newArray) <span class="comment">// ["a", "b", "c", "d"]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> words = [<span class="string">"one"</span>, <span class="string">"two"</span>, <span class="string">"three"</span>, <span class="string">"four"</span>];</span><br><span class="line">words.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">word</span>) </span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(word);</span><br><span class="line"><span class="keyword">if</span> (word === <span class="string">"two"</span>) &#123;</span><br><span class="line">words.shift();</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// one</span></span><br><span class="line"><span class="comment">// two</span></span><br><span class="line"><span class="comment">// four</span></span><br></pre></td></tr></table></figure>
+<p>當到達包含值”two” 的項時，整個陣列的第一個項被移除了，這導致所有剩下的項上移一個位置。因為元素”four” 現在在陣列更前的位置，”three” 會被跳過。</p>
+<h2 id="二、-map"><a href="#二、-map" class="headerlink" title="二、 map"></a>二、 map</h2><h3 id="1-map-的使用方法"><a href="#1-map-的使用方法" class="headerlink" title="1. map 的使用方法"></a>1. map 的使用方法</h3><p>map 和 forEach 很像，但是不同的是 map <strong>有 return 值</strong>，可以把值賦予到另一個變數上，形成一個新的陣列，新的陣列的長度和原陣列長度相同</p>
+<blockquote>
+<p>const newArray = array.map(function(item, index, array){<br>     // return ….. //<br>})</p>
+</blockquote>
+<p><strong>item: 陣列中成員的值</strong><br><strong>index: 陣列中成員的索引</strong><br><strong>array: 代表整個陣列</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 隔壁桌的客人看到一樣的菜單決定要點一模一樣的菜，不過他們每個人打算多家一顆蛋</span></span><br><span class="line"><span class="keyword">let</span> copyOrder = menuOrder.map(<span class="function">(<span class="params">item,index</span>) =&gt;</span> &#123;</span><br><span class="line">  item.price = item.price + <span class="number">10</span>; <span class="comment">//但一顆 10塊</span></span><br><span class="line">  <span class="keyword">return</span> item;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(copyOrder); <span class="comment">// 隔壁桌客人的每道菜多十塊</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="4-使用-for-迴圈"><a href="#4-使用-for-迴圈" class="headerlink" title="4. 使用 for 迴圈"></a>4. 使用 for 迴圈</h3><p>利用 for 迴圈一一將陣列資料擺進去</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> array = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> newArray = []</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span> ; i&lt;array.length ; i++)&#123; </span><br><span class="line">  newArray[i] = array[i]</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 或使用 forEach 是一樣的</span></span><br><span class="line"><span class="comment">//array.forEach(function(item,i)&#123; </span></span><br><span class="line"><span class="comment">//  newArray[i] = array[i]</span></span><br><span class="line"><span class="comment">//&#125;)</span></span><br><span class="line"></span><br><span class="line">newArray.push(<span class="string">'d'</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(array) <span class="comment">// ["a", "b", "c"]</span></span><br><span class="line"><span class="built_in">console</span>.log(newArray) <span class="comment">// ["a", "b", "c", "d"]</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-使用-map-需要注意到的"><a href="#2-使用-map-需要注意到的" class="headerlink" title="2. 使用 map 需要注意到的"></a>2. 使用 map 需要注意到的</h3><ul>
+<li>map 不適合用來過濾，因為 return 值無論有或沒有都會回傳，有可能回傳的值是 undefined。</li>
+<li>如果不回傳陣列內的值為 undefined</li>
+</ul>
+<p>::: info<br>:bulb: forEach 是修改自身的陣列， map 透過回傳值形成一個新的陣列<br>:::</p>
+<h2 id="三、-filter"><a href="#三、-filter" class="headerlink" title="三、 filter"></a>三、 filter</h2><h3 id="1-filter-的使用方法"><a href="#1-filter-的使用方法" class="headerlink" title="1. filter 的使用方法"></a>1. filter 的使用方法</h3><p>使用 filter 可以過濾出陣列中符合條件為 true 的值建立一個新的陣列，新的陣列的長度和原陣列長度不一定相同</p>
+<blockquote>
+<p>const newArray = array.filter(function(item, index, array){<br>     // return ….. //<br>})</p>
+</blockquote>
+<p><strong>item: 陣列中成員的值</strong><br><strong>index: 陣列中成員的索引</strong><br><strong>array: 代表整個陣列</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 媽媽要教兒子數學，要她挑選出價錢大於 50 的菜。</span></span><br><span class="line"><span class="keyword">let</span> higherThan50 = menuOrder.filter(<span class="function">(<span class="params">item,index</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> item.price&gt;<span class="number">50</span>; <span class="comment">// 過濾出價錢大於 50 的 item</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(higherThan50);</span><br><span class="line"><span class="comment">// &#123;father: "Tom", eat: "酸辣湯餃", price: 70&#125;</span></span><br><span class="line"><span class="comment">// &#123;son: "Peter", eat: "炸醬面", price: 60&#125;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="5-使用-for-in-淺拷貝物件"><a href="#5-使用-for-in-淺拷貝物件" class="headerlink" title="5. 使用 for in 淺拷貝物件"></a>5. 使用 for in 淺拷貝物件</h3><p><font color="red"><strong>注意</strong></font>，這邊說的是物件 {}<br>類似 forEach 的語法，但只能用在物件上，可以將 key 值拉出來，更具彈性。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> object = &#123;</span><br><span class="line">    father: <span class="string">'Mike'</span>,</span><br><span class="line">    mother: <span class="string">'Mary'</span>,</span><br><span class="line">    child1:<span class="string">'John'</span>,</span><br><span class="line">    child2:<span class="string">'Peter'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> newObject = &#123;&#125;;</span><br><span class="line"> <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> object)&#123;</span><br><span class="line">     newObject[key] = object[key]</span><br><span class="line"> &#125;</span><br><span class="line"> newObject.father = <span class="string">'Tom'</span>;</span><br><span class="line"> </span><br><span class="line"> <span class="built_in">console</span>.log(object)</span><br><span class="line"> <span class="built_in">console</span>.log(newObject)</span><br></pre></td></tr></table></figure>
 
-<h3 id="6-使用-Object-assign-來複製物件"><a href="#6-使用-Object-assign-來複製物件" class="headerlink" title="6. 使用 Object.assign 來複製物件"></a>6. 使用 Object.assign 來複製物件</h3><p><font color="red"><strong>注意</strong></font>，這邊說的是物件 {}</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> object = &#123; <span class="attr">father</span>: <span class="string">'Mike'</span> &#125;</span><br><span class="line"><span class="keyword">let</span> newObject = <span class="built_in">Object</span>.assign(&#123;&#125;,object);</span><br><span class="line"></span><br><span class="line">newObject.father = <span class="string">'Kevin'</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(object) <span class="comment">// &#123;father: "Mike"&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(newObject) <span class="comment">// &#123;father: "Kevin"&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="四、-find"><a href="#四、-find" class="headerlink" title="四、 find"></a>四、 find</h2><h3 id="1-find-的使用方法"><a href="#1-find-的使用方法" class="headerlink" title="1. find 的使用方法"></a>1. find 的使用方法</h3><p>不論陣列中有多少條件符合，只會回傳找到的第一個值。<br>適合用來<strong>找 ID 或者是特定條件</strong>。</p>
+<blockquote>
+<p>const newArray = array.find(function(item, index, array){<br>     // return ….. //<br>})</p>
+</blockquote>
+<p><strong>item: 陣列中成員的值</strong><br><strong>index: 陣列中成員的索引</strong><br><strong>array: 代表整個陣列</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 媽媽要教兒子數學，要她挑選出價錢大於 50 的菜，但使用 find 一次只能找出一樣</span></span><br><span class="line"><span class="keyword">let</span> findOrder = menuOrder.find(<span class="function">(<span class="params">item,index</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> item.price&gt;<span class="number">50</span>; <span class="comment">// 找出大於 50 的第一個菜</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(findOrder);</span><br><span class="line"><span class="comment">// 因為使用 find，每次兒子只能找到一到菜，媽媽耐心地說，找出 60 塊的菜</span></span><br><span class="line"><span class="keyword">let</span> findOrder = menuOrder.find(<span class="function">(<span class="params">item,index</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> item.price === <span class="number">60</span>; <span class="comment">// 找出 60 的第一個菜</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(findOrder); <span class="comment">// &#123;son: "Peter", eat: "炸醬面", price: 60&#125;</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="二、深拷貝-deep-copy-的方法"><a href="#二、深拷貝-deep-copy-的方法" class="headerlink" title="二、深拷貝 (deep copy) 的方法"></a>二、深拷貝 (deep copy) 的方法</h2><h3 id="1-使用-JSON-parse-JSON-stringtify-陣列-來實踐。"><a href="#1-使用-JSON-parse-JSON-stringtify-陣列-來實踐。" class="headerlink" title="1. 使用 JSON.parse(JSON.stringtify(陣列)) 來實踐。"></a>1. 使用 JSON.parse(JSON.stringtify(陣列)) 來實踐。</h3><p>透過 JSON.stringify 將陣列轉換成 JSON 的字串，再透過 JSON.parse 轉換為物件</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> array = [</span><br><span class="line">  &#123;</span><br><span class="line">    father: <span class="string">'Mike'</span>,</span><br><span class="line">    mother: <span class="string">'Mary'</span>,</span><br><span class="line">    child: [<span class="string">'John'</span>, <span class="string">'Tom'</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    father: <span class="string">'Peter'</span>,</span><br><span class="line">    mother: <span class="string">'Jane'</span>,</span><br><span class="line">    child: [<span class="string">'Kevin'</span>, <span class="string">'Jerry'</span>, <span class="string">'Pan'</span>]</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> newArray = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(array));</span><br><span class="line">newArray[<span class="number">1</span>].child = [<span class="string">'Kevin'</span>, <span class="string">'Jerry'</span>]</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(array)</span><br><span class="line">  <span class="comment">// &#123;</span></span><br><span class="line">  <span class="comment">//   father: 'Mike',</span></span><br><span class="line">  <span class="comment">//   mother: 'Mary',</span></span><br><span class="line">  <span class="comment">//   child: ['John', 'Tom']</span></span><br><span class="line">  <span class="comment">// &#125;,</span></span><br><span class="line"><span class="built_in">console</span>.log(newArray) </span><br><span class="line"><span class="comment">//  &#123;</span></span><br><span class="line"><span class="comment">//    father: 'Peter',</span></span><br><span class="line"><span class="comment">//    mother: 'Jane',</span></span><br><span class="line"><span class="comment">//    child: ['Kevin', 'Jerry']</span></span><br><span class="line"><span class="comment">//  &#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="五、-findIndex"><a href="#五、-findIndex" class="headerlink" title="五、 findIndex"></a>五、 findIndex</h2><h3 id="1-findIndex-的使用方法"><a href="#1-findIndex-的使用方法" class="headerlink" title="1. findIndex 的使用方法"></a>1. findIndex 的使用方法</h3><p>findIndex 用來找符合條件的 item 的索引</p>
+<blockquote>
+<p>const newArray = array.findIndex(function(item, index, array){<br>     // return ….. //<br>})</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 媽媽問兒子， 60 塊的菜是第幾道出的菜阿</span></span><br><span class="line"><span class="keyword">let</span> findIndexOrder = menuOrder.findIndex(<span class="function">(<span class="params">item,index</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> item.price === <span class="number">60</span>; <span class="comment">// 找出 60 的第一個菜</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(findIndexOrder); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
 
-<p>但 JSON 的方法只限用於資料為單純的數值、字串，如果資料內有函式、map、set 就無效了。</p>
-<h3 id="2-完全的深拷貝，使用-JQuery"><a href="#2-完全的深拷貝，使用-JQuery" class="headerlink" title="2. 完全的深拷貝，使用 JQuery"></a>2. 完全的深拷貝，使用 JQuery</h3><p>$.extend(true ,{}, obj)<br><strong>true</strong> : 使否使用深拷貝，如果沒有寫就是淺拷貝<br><strong>{}</strong>   : 空的物件，放入拷貝的物件<br><strong>obj</strong>  : 將被深拷貝的物件</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;<span class="attr">name</span>: <span class="string">'天天'</span>, age()&#123;<span class="built_in">console</span>.log(<span class="string">'24 歲'</span>)&#125;&#125;</span><br><span class="line"><span class="keyword">let</span> copyObj = $.extend(<span class="literal">true</span> ,&#123;&#125;, obj); <span class="comment">//使用 jquery.extend</span></span><br><span class="line"></span><br><span class="line">copyObj.name = <span class="string">'開心'</span>;</span><br><span class="line">copyObj.age = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="string">'20 歲'</span>)&#125;; <span class="comment">//更改輸出的函式</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj);  <span class="comment">//&#123;name: "天天", age()&#123;console.log('24 歲')&#125;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(copyObj); <span class="comment">//&#123;name: "'開心", age()&#123;console.log('20 歲')&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>::: info<br>:bulb: find 是回傳 item , findIndex 是回傳 Index<br>:::</p>
+<h2 id="六、-every"><a href="#六、-every" class="headerlink" title="六、 every"></a>六、 every</h2><p>所有結果都符合條件才會回傳 true，否則為 false</p>
+<blockquote>
+<p>const newArray = array.every(function(item, index, array){<br>     // return ….. // 全部符合條件才為 true<br>})</p>
+</blockquote>
+<p><strong>item: 陣列中成員的值</strong><br><strong>index: 陣列中成員的索引</strong><br><strong>array: 代表整個陣列</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 媽媽問兒子， 是不是所有的菜都是 50 塊以上阿</span></span><br><span class="line"><span class="keyword">let</span> everyOrder = menuOrder.every(<span class="function">(<span class="params">item,index</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> item.price &gt; <span class="number">50</span>; <span class="comment">// 判斷是否所有的菜大於 50</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(everyOrder); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<h2 id="七、-some"><a href="#七、-some" class="headerlink" title="七、 some"></a>七、 some</h2><p>只有有一個結果符合條件，就會回傳 true，全部不符合才會回傳 false</p>
+<blockquote>
+<p>const newArray = array.some(function(item, index, array){<br>     // return ….. // 部分符合條件才為 true<br>})</p>
+</blockquote>
+<p><strong>item: 陣列中成員的值</strong><br><strong>index: 陣列中成員的索引</strong><br><strong>array: 代表整個陣列</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 媽媽問兒子， 是不是有些菜是 50 塊以上阿</span></span><br><span class="line"><span class="keyword">let</span> someOrder = menuOrder.some(<span class="function">(<span class="params">item,index</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> item.price &gt; <span class="number">50</span>; <span class="comment">// 判斷是否所有的菜大於 50</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(someOrder); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="3-完全的深拷貝，使用-ladash-libary"><a href="#3-完全的深拷貝，使用-ladash-libary" class="headerlink" title="3. 完全的深拷貝，使用 ladash libary"></a>3. 完全的深拷貝，使用 ladash libary</h3><p>事前要先載入 ladash libary</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;<span class="attr">name</span>: <span class="string">'天天'</span>, age()&#123;<span class="built_in">console</span>.log(<span class="string">'24 歲'</span>)&#125;&#125;</span><br><span class="line"><span class="keyword">let</span> copyObj = _.cloneDeep(obj); <span class="comment">//使用 ladash 深拷貝</span></span><br><span class="line"></span><br><span class="line">copyObj.name = <span class="string">'開心'</span>;</span><br><span class="line">copyObj.age = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="string">'20 歲'</span>)&#125;; <span class="comment">//更改輸出的函式</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj);  <span class="comment">//&#123;name: "天天", age()&#123;console.log('24 歲')&#125;&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(copyObj); <span class="comment">//&#123;name: "'開心", age()&#123;console.log('20 歲')&#125;&#125;</span></span><br></pre></td></tr></table></figure>
 
-<p>使用 jQuery 和 ladash 的方法，就連<font color="red">函式</font>也能複製出來。</p>
-<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><p><a href="https://eyesofkids.gitbooks.io/javascript-start-from-es6/content/part3/array.html#slice" target="_blank" rel="noopener">從ES6開始的JavaScript學習生活</a></p>
+<h2 id="八、-reduce-歸納"><a href="#八、-reduce-歸納" class="headerlink" title="八、 reduce(歸納)"></a>八、 reduce(歸納)</h2><p>reduce 會將前一個值和下一個值做運算，這邊會多一個初始值(initPrev)，如果沒給初始值，會從索引值1開始開始迭代</p>
+<blockquote>
+<p>const reduceArray = array.some(function(prev, item, index, array){<br>     // return ….. //<br>}, initPrev)</p>
+</blockquote>
+<p><strong>pre: 前一個值，如果沒有則會帶入 initPrev</strong><br><strong>item: 陣列中成員的值</strong><br><strong>index: 陣列中成員的索引</strong><br><strong>array: 代表整個陣列</strong></p>
+<h3 id="1-reduce-使用的情境"><a href="#1-reduce-使用的情境" class="headerlink" title="1. reduce 使用的情境"></a>1. reduce 使用的情境</h3><ul>
+<li>兩相比較最後取出特定的值(最大或最小值)<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 媽媽要兒子一一比較出哪一到菜最貴</span></span><br><span class="line"><span class="keyword">const</span> maxOrder = menuOrder.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">prev, item, index</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(prev);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.max(prev, item.price); <span class="comment">// prev 每次迭代會和 item.money 比較數值大小</span></span><br><span class="line">&#125;,<span class="number">0</span>)</span><br><span class="line"><span class="built_in">console</span>.log(maxOrder)</span><br></pre></td></tr></table></figure></li>
+<li>計算所有成員(值)，總合或相乘<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 媽媽問兒子全部要付多少錢</span></span><br><span class="line"><span class="keyword">const</span> totalOrder = menuOrder.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">prev, item, index</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(prev);</span><br><span class="line">    <span class="keyword">return</span> prev + item.price; <span class="comment">// prev 每次迭代會和 item.money 相加</span></span><br><span class="line">&#125;,<span class="number">0</span>)</span><br><span class="line"><span class="built_in">console</span>.log(totalOrder) <span class="comment">//總共要付的錢</span></span><br></pre></td></tr></table></figure></li>
+<li>其它需要兩兩處理的情況(組合巢狀陣列等等)</li>
+</ul>
+<p>::: warning<br>這次 item 的值，會變成下次 prev 的值<br>:::</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><p><a href="https://wcc723.github.io/javascript/2017/06/29/es6-native-array/" target="_blank" rel="noopener">卡斯柏 JavaScript 陣列處理方法</a><br><a href="https://www.itread01.com/hkflcli.html" target="_blank" rel="noopener">iTread</a></p>
 
       
     </div>
@@ -438,9 +486,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
-          
-            <a href="/tags/%E9%99%A3%E5%88%97%E8%B3%87%E6%96%99%E8%99%95%E7%90%86/" rel="tag"># 陣列資料處理</a>
+            <a href="/tags/ES6/" rel="tag"># ES6</a>
           
         </div>
       
@@ -453,8 +499,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/%E5%B8%B8%E7%94%A8%E5%85%83%E4%BB%B6/20200328/1675033308/" rel="next" title="常用元件-實作分頁的方法">
-                <i class="fa fa-chevron-left"></i> 常用元件-實作分頁的方法
+              <a href="/javascript/20200328/1076886642/" rel="next" title="深拷貝與淺拷貝">
+                <i class="fa fa-chevron-left"></i> 深拷貝與淺拷貝
               </a>
             
           </div>
@@ -462,10 +508,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/ES6/20200329/565821282/" rel="prev" title="ES6 陣列常用的操作方法">
-                ES6 陣列常用的操作方法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -601,7 +643,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#關於陣列的拷貝"><span class="nav-number">1.</span> <span class="nav-text">關於陣列的拷貝</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、淺拷貝-shadow-copy-的方法"><span class="nav-number">1.1.</span> <span class="nav-text">一、淺拷貝 (shadow copy) 的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-使用展開-spread-運算子"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 使用展開 (spread) 運算子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-使用-slice"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. 使用 slice</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-使用-concat"><span class="nav-number">1.1.3.</span> <span class="nav-text">3. 使用 concat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-使用-for-迴圈"><span class="nav-number">1.1.4.</span> <span class="nav-text">4. 使用 for 迴圈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-使用-for-in-淺拷貝物件"><span class="nav-number">1.1.5.</span> <span class="nav-text">5. 使用 for in 淺拷貝物件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-使用-Object-assign-來複製物件"><span class="nav-number">1.1.6.</span> <span class="nav-text">6. 使用 Object.assign 來複製物件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、深拷貝-deep-copy-的方法"><span class="nav-number">1.2.</span> <span class="nav-text">二、深拷貝 (deep copy) 的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-使用-JSON-parse-JSON-stringtify-陣列-來實踐。"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 使用 JSON.parse(JSON.stringtify(陣列)) 來實踐。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-完全的深拷貝，使用-JQuery"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 完全的深拷貝，使用 JQuery</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-完全的深拷貝，使用-ladash-libary"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. 完全的深拷貝，使用 ladash libary</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">1.3.</span> <span class="nav-text">參考資料</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、forEach"><span class="nav-number">1.</span> <span class="nav-text">一、forEach</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-forEach-的使用方法"><span class="nav-number">1.1.</span> <span class="nav-text">1. forEach 的使用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-使用-forEach-需要注意到的"><span class="nav-number">1.2.</span> <span class="nav-text">2. 使用 forEach 需要注意到的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、-map"><span class="nav-number">2.</span> <span class="nav-text">二、 map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-map-的使用方法"><span class="nav-number">2.1.</span> <span class="nav-text">1. map 的使用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-使用-map-需要注意到的"><span class="nav-number">2.2.</span> <span class="nav-text">2. 使用 map 需要注意到的</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、-filter"><span class="nav-number">3.</span> <span class="nav-text">三、 filter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-filter-的使用方法"><span class="nav-number">3.1.</span> <span class="nav-text">1. filter 的使用方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、-find"><span class="nav-number">4.</span> <span class="nav-text">四、 find</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-find-的使用方法"><span class="nav-number">4.1.</span> <span class="nav-text">1. find 的使用方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、-findIndex"><span class="nav-number">5.</span> <span class="nav-text">五、 findIndex</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-findIndex-的使用方法"><span class="nav-number">5.1.</span> <span class="nav-text">1. findIndex 的使用方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、-every"><span class="nav-number">6.</span> <span class="nav-text">六、 every</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、-some"><span class="nav-number">7.</span> <span class="nav-text">七、 some</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、-reduce-歸納"><span class="nav-number">8.</span> <span class="nav-text">八、 reduce(歸納)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-reduce-使用的情境"><span class="nav-number">8.1.</span> <span class="nav-text">1. reduce 使用的情境</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">9.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
             
 
           </div>

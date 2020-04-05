@@ -89,7 +89,7 @@
 <meta property="og:image" content="https://i.imgur.com/H1a2uml.png">
 <meta property="og:image" content="https://i.imgur.com/BJXLpFP.png">
 <meta property="article:published_time" content="2020-04-05T02:15:02.000Z">
-<meta property="article:modified_time" content="2020-04-05T02:16:53.968Z">
+<meta property="article:modified_time" content="2020-04-05T04:53:19.280Z">
 <meta property="article:author" content="Pai">
 <meta property="article:tag" content="JavaScript、closure">
 <meta name="twitter:card" content="summary">
@@ -393,6 +393,7 @@
 <p>「切分變數有效範圍的最小單位是 “function” 」</p>
 <p>但如果你無論如何都想要讀取到要怎麼辦呢? 這時候就不得不提閉包了。<br>閉包除了可以 <strong>在外層讀取到內的的變數</strong> 外，<br>還可以<del>建立屬於自己的異世界</del> <strong>儲存建立環境時的變數值</strong>。</p>
 <p>趕快來探索這個異世界的奧秘吧</p>
+<a id="more"></a>
 <h1 id="二、閉包"><a href="#二、閉包" class="headerlink" title="二、閉包"></a>二、閉包</h1><p>因為 function 內部的變數無法被外部讀取，因此在使用 function 時常常需要在外層宣告了很多變數，如果是大型的案子可能會造成衝突。</p>
 <p>以這個程式碼為例，變數都必須先宣告在函式外</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> LeoTeam = <span class="number">4</span> <span class="comment">// Leo 的團隊有 4 個人</span></span><br><span class="line"><span class="keyword">var</span> TomTeam = <span class="number">5</span> <span class="comment">// Tom 的團隊有 5 個人</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addLeo</span>(<span class="params">num</span>)</span>&#123; </span><br><span class="line">    LeoTeam = LeoTeam + num;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addTom</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">    TomTeam = TomTeam + num;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">addLeo(<span class="number">2</span>); <span class="comment">// Leo 的團隊今天多招募了兩個人</span></span><br><span class="line"><span class="comment">//一天過後</span></span><br><span class="line">addTom(<span class="number">1</span>); <span class="comment">// Tom 的團隊隔天多招募了一個人</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'LeoTeam:'</span>+LeoTeam, <span class="string">'TomTeam:'</span>+TomTeam);</span><br></pre></td></tr></table></figure>
